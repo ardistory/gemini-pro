@@ -3,12 +3,10 @@
 namespace App\Livewire;
 
 use App\Repository\GeminiPro as RepositoryGeminiPro;
-use Illuminate\Support\Facades\App;
 use Livewire\Component;
 
 class GeminiPro extends Component
 {
-
     public string $question = '';
     public array $response = [];
     public array $wdyt = [
