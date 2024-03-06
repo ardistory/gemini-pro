@@ -1,0 +1,52 @@
+{
+    "contents": [
+        {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "tanggal berdirinya javascript?"
+                }
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                {
+                    "text": "16 Desember 1995"
+                }
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "kalau php?"
+                }
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                {
+                    "text": "8 Juni 1995"
+                }
+            ]
+        },
+        {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "kalau golang?"
+                }
+            ]
+        },
+        {
+            "role": "model",
+            "parts": [
+                {
+                    "text": "November 2009"
+                }
+            ]
+        }
+    ]
+}

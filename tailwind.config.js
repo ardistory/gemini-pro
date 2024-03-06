@@ -5,7 +5,11 @@ export default {
     './resources/views/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'Inter': ['Inter']
+      }
+    },
   },
   plugins: [],
 }
