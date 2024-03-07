@@ -9,27 +9,39 @@
         </div>
     </div>
     <div class="mt-4">
-        @foreach ($fullData as $asking)
-            <span
-                class="w-full inline-flex justify-end font-semibold">{{ ucfirst($asking['contents'][0][0]['role']) }}</span>
+        @foreach ($responseText as $response)
+            {{-- @dd($response) --}}
+            <span class="w-full inline-flex justify-end font-semibold">User</span>
             <div class="flex justify-end">
                 <div class="flex justify-end w-[90%]">
                     <div class="max-w-fit bg-white text-black ring-1 ring-white px-4 py-2 rounded-l-md rounded-br-md">
-                        <p>{{ $asking['contents'][0][0]['parts'][0]['text'] }}</p>
+                        <p>{{ $response['contents'][0]['parts'][0]['text'] }}</p>
                     </div>
                 </div>
             </div>
-            <span
-                class="mt-1 w-full inline-flex justify-start font-semibold">{{ ucfirst($asking['contents'][0][1]['role']) }}</span>
-            <div
-                class="w-[90%] mb-1 first:mt-0 flex justify-between ring-1 ring-white transition duration-200 px-4 py-2 rounded-r-md rounded-bl-md">
-                <div>
-                    @foreach ($asking['contents'][0][1]['parts'][0]['text'] as $response)
-                        <p>{{ $response }}</p>
-                    @endforeach
+            <span class="mt-1 w-full inline-flex justify-start font-semibold">Model</span>
+            <div class="max-w-[90%]">
+                <div
+                    class="max-w-fit mb-1 first:mt-0 flex justify-between ring-1 ring-white transition duration-200 px-4 py-2 rounded-r-md rounded-bl-md">
+                    <div class="max-w-fit">
+                        @foreach ($response['contents'][1]['parts'][0]['text'] as $rspn)
+                            <p>{{ $rspn }}</p>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         @endforeach
+        @if (Session::has('error'))
+            <span class="mt-1 w-full inline-flex justify-start font-semibold">Model</span>
+            <div class="max-w-[90%]">
+                <div
+                    class="max-w-fit mb-1 first:mt-0 flex justify-between ring-1 ring-white transition duration-200 px-4 py-2 rounded-r-md rounded-bl-md">
+                    <div class="max-w-fit">
+                        <p>{{ Session::get('error') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="relative w-full flex justify-between gap-2 mt-4">
             <input wire:model='question' wire:keydown.enter='askTheQuestion'
                 class="w-full outline-none rounded-xl text-black px-2 py-1" type="text"

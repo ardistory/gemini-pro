@@ -2,37 +2,40 @@
 
 namespace App\Livewire;
 
-use App\Repository\GeminiPro as RepositoryGeminiPro;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class GeminiPro extends Component
 {
+    protected \App\Repository\GeminiPro $geminiPro;
     public string $question = '';
     public array $wdyt;
-    public array $fullData;
-    public function mount()
+    public array $responseText;
+
+    public function mount(\App\Repository\GeminiPro $geminiPro)
     {
-        $this->wdyt = RepositoryGeminiPro::getWdyt();
+        $this->wdyt = $geminiPro->getWdyt();
     }
 
     public function askTheQuestion()
     {
-        RepositoryGeminiPro::$innerContents[] = [
-            'role' => 'user',
-            'parts' => [
-                [
-                    'text' => $this->question
-                ]
-            ]
-        ];
+        if ($this->question != '') {
+            $this->geminiPro = app()->make(\App\Repository\GeminiPro::class);
+            $this->geminiPro->setQuestion($this->question);
 
-        $this->reset('question');
+            $data = $this->geminiPro->generateResponse();
 
-        $api = new RepositoryGeminiPro();
+            if ($data != false) {
+                $this->responseText[] = $data;
+            } else {
+                Session::flash('error', 'Silahkan coba pertanyaan lain!');
+            }
 
-        $this->fullData[] = $api->generateResponse();
-        Log::info(json_encode(RepositoryGeminiPro::$innerContents, JSON_PRETTY_PRINT));
+            $this->reset('question');
+        } else {
+            Session::flash('error', 'Form dilarang kosong!');
+        }
     }
 
     public function render()

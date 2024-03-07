@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class GeminiPro
 {
-    public array $storage;
-    public array $innerContents;
     public static array $wdyt = [
         "buatkan saya cerita pendek menarik",
         "cara mendapatkan uang di internet?",
@@ -23,63 +21,67 @@ class GeminiPro
         "apa yang terjadi, setelah jepang kalah perang?",
     ];
 
-    public function __construct()
-    {
-        $this->storage = [];
-        $this->innerContents = [];
-    }
-
+    public string $url;
+    public array $postBody;
+    public array $responseText;
     public static function getWdyt(): array
     {
         return self::$wdyt;
     }
 
+    public function __construct()
+    {
+        $this->url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . env('GEMINI_API_KEY');
+    }
+
+    public function setQuestion(string $yourQuestion)
+    {
+        $this->postBody['contents'][] = [
+            'role' => 'user',
+            'parts' => [
+                [
+                    'text' => $yourQuestion
+                ]
+            ]
+        ];
+    }
+
     public function generateResponse()
     {
-        // URL tujuan
-        $url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' . env('GEMINI_API_KEY');
+        $ch = curl_init($this->url);
 
-        $data = [
-            "contents" => $this->innerContents
-        ];
-
-        // Konversi data ke format JSON
-        $json_data = json_encode($data);
-
-        // Konfigurasi curl
-        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->postBody));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Eksekusi curl dan tangani respons
         $response = curl_exec($ch);
 
         if ($response) {
-            // Tampilkan respons
-            $data = json_decode($response);
+            $responseText = json_decode($response, true);
 
-            $formatData = explode("\n", $data->candidates[0]->content->parts[0]->text);
+            if (isset($responseText['candidates'][0]['content']['parts'][0]['text'])) {
+                $formatData = explode("\n", $responseText['candidates'][0]['content']['parts'][0]['text']);
 
-            $collection = Collection::make($formatData);
+                $formatDataCollection = Collection::make($formatData);
 
-            $collection->map(function ($value) {
-                $this->storage[] = str_replace("*", "", $value);
-            });
+                $formatDataCollection->map(function ($value) {
+                    $this->responseText[] = str_replace("*", "", $value);
+                });
 
-            $this->innerContents[] = [
-                'role' => 'model',
-                'parts' => [
-                    [
-                        'text' => $this->storage
+                $this->postBody['contents'][] = [
+                    'role' => 'model',
+                    'parts' => [
+                        [
+                            'text' => $this->responseText
+                        ]
                     ]
-                ]
-            ];
+                ];
 
-            return [
-                "contents" => $this->innerContents
-            ];
+                return $this->postBody;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
