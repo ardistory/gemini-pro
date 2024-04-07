@@ -59,6 +59,7 @@ class ImageGenerator
             'memek',
             'kontol',
             'sperm',
+            'sperma',
             'body',
             'women',
             'girl',
