@@ -74,15 +74,13 @@ class BotTelegramController extends Controller
             $imageGenerator->setPrompt($trimmedTextRequest);
             $base64image = $imageGenerator->generateImage();
 
-            $log = [
+            $log = json_encode([
                 'username' => $this->usernameRequest,
                 'chat_id' => $this->chatIdRequest,
                 'prompt' => str_ireplace("img:", "", $this->textRequest)
-            ];
+            ], JSON_PRETTY_PRINT);
 
-            $logFile = fopen(storage_path('app/public/log.txt'), 'a+');
-            fwrite($logFile, json_encode($log, JSON_PRETTY_PRINT));
-            fclose($logFile);
+            Storage::disk('local')->put('log.txt', $log);
 
             $response = $this->imageResponse([
                 'chat_id' => $this->chatIdRequest
@@ -105,15 +103,13 @@ class BotTelegramController extends Controller
         $imageGenerator->setPrompt($trimmedTextRequest);
         $base64image = $imageGenerator->generateImage();
 
-        $log = [
+        $log = json_encode([
             'username' => $this->usernameRequest,
             'chat_id' => $this->chatIdRequest,
             'prompt' => str_ireplace("img:", "", $this->textRequest)
-        ];
+        ], JSON_PRETTY_PRINT);
 
-        $logFile = fopen(storage_path('app/public/log.txt'), 'a+');
-        fwrite($logFile, json_encode($log, JSON_PRETTY_PRINT));
-        fclose($logFile);
+        Storage::disk('local')->put('log.txt', $log);
 
         $response = $this->imageResponse([
             'chat_id' => $this->chatIdRequest
