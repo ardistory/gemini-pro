@@ -80,7 +80,7 @@ class BotTelegramController extends Controller
                 'prompt' => str_ireplace("img:", "", $this->textRequest)
             ], JSON_PRETTY_PRINT);
 
-            Storage::disk('local')->put('log.txt', $log);
+            Storage::disk('local')->append('log.txt', $log);
 
             $response = $this->imageResponse([
                 'chat_id' => $this->chatIdRequest
@@ -109,7 +109,7 @@ class BotTelegramController extends Controller
             'prompt' => str_ireplace("img:", "", $this->textRequest)
         ], JSON_PRETTY_PRINT);
 
-        Storage::disk('local')->put('log.txt', $log);
+        Storage::disk('local')->append('log.txt', $log);
 
         $response = $this->imageResponse([
             'chat_id' => $this->chatIdRequest
