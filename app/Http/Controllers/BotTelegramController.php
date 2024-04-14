@@ -20,7 +20,7 @@ class BotTelegramController extends Controller
     public bool $isContinue = false;
 
 
-    public function curlResponse(array $queryParameter, string $method, string $contentType)
+    private function curlResponse(array $queryParameter, string $method, string $contentType)
     {
         $ch = curl_init();
 
@@ -118,7 +118,7 @@ class BotTelegramController extends Controller
         return "Safe guest!";
     }
 
-    public function sendResponse(Request $request)
+    public function sendResponse(Request $request, GeminiPro $geminiPro)
     {
         if ($request->header('X-Telegram-Bot-Api-Secret-Token') == 'berserk') {
             $requestAll = $request->all();
@@ -150,28 +150,109 @@ class BotTelegramController extends Controller
                 }
             } else {
                 try {
-                    $geminiPro = new GeminiPro();
-                    $geminiPro->setQuestion($this->textRequest);
-                    $responseFromGeminiPro = $geminiPro->generateResponse();
+                    if ($this->textRequest == '/start') {
+                        if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
+                            $this->curlResponse([
+                                'text' => 'Session exist, bisa langsung ajukan pertanyaan',
+                                'chat_id' => $this->chatIdRequest,
+                                'parse_mode' => 'Markdown'
+                            ], 'sendMessage', 'application/json');
 
-                    if ($responseFromGeminiPro != false) {
-                        $arrayResponse = $responseFromGeminiPro['contents'][1]['parts'][0]['text'];
-
-                        $collectionArrayResponse = Collection::make($arrayResponse);
-                        $collectionArrayResponse->map(function ($value) {
-                            $this->textResponse .= str_replace("```", "`", $value . "\n");
-                        });
+                            return response()->json([
+                                'info' => "Session " . $this->chatIdRequest . '_session.json exists',
+                                'message' => 'Session exist, bisa langsung ajukan pertanyaan'
+                            ]);
+                        }
 
                         $this->curlResponse([
-                            'text' => $this->textResponse,
+                            'text' => 'session dimulai, silahkan ajukan pertanyaan',
                             'chat_id' => $this->chatIdRequest,
                             'parse_mode' => 'Markdown'
                         ], 'sendMessage', 'application/json');
-                    } else {
+
+                        Storage::disk('local')->put($this->chatIdRequest . '_session.json', '');
+
+                        return response()->json([
+                            'info' => "Created new session : " . $this->chatIdRequest . '_session.json',
+                            'message' => 'session dimulai, silahkan ajukan pertanyaan'
+                        ]);
+                    } else if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
+                        $geminiPro->setChatIdRequest($this->chatIdRequest);
+                        $geminiPro->setQuestion($this->textRequest);
+                        $responseFromGeminiPro = $geminiPro->generateResponse();
+
+                        if ($responseFromGeminiPro != false) {
+                            $arrayResponse = $responseFromGeminiPro['contents'][1]['parts'][0]['text'];
+
+                            $collectionArrayResponse = Collection::make($arrayResponse);
+                            $collectionArrayResponse->map(function ($value) {
+                                $this->textResponse .= str_replace("```", "`", $value . "\n");
+                            });
+
+                            $this->curlResponse([
+                                'text' => $this->textResponse,
+                                'chat_id' => $this->chatIdRequest,
+                                'parse_mode' => 'Markdown'
+                            ], 'sendMessage', 'application/json');
+
+                            if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
+                                $getSessionFromFile = Storage::disk('local')->get($this->chatIdRequest . '_session.json');
+
+                                $arraySessionFromFile = json_decode($getSessionFromFile, true);
+
+                                $arraySessionFromFile['contents'][] = [
+                                    'role' => 'user',
+                                    'parts' => [
+                                        [
+                                            'text' => $this->textRequest
+                                        ]
+                                    ]
+                                ];
+
+                                $arraySessionFromFile['contents'][] = [
+                                    'role' => 'model',
+                                    'parts' => [
+                                        [
+                                            'text' => $this->textResponse
+                                        ]
+                                    ]
+                                ];
+
+                                if (!isset($arraySessionFromFile['safetySettings'])) {
+                                    $arraySessionFromFile['safetySettings'][] = [
+                                        [
+                                            "category" => "HARM_CATEGORY_DANGEROUS_CONTENT",
+                                            "threshold" => "BLOCK_ONLY_HIGH"
+                                        ]
+                                    ];
+                                }
+
+                                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($arraySessionFromFile, JSON_PRETTY_PRINT));
+                            } else {
+                                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($geminiPro->getConversation(), JSON_PRETTY_PRINT));
+                            }
+
+                            $arraySession = json_decode(Storage::get($this->chatIdRequest . '_session.json'), true);
+
+                            return response()->json($arraySession);
+                        } else {
+                            $this->curlResponse([
+                                'text' => '😶‍🌫️',
+                                'chat_id' => $this->chatIdRequest
+                            ], 'sendMessage', 'application/json');
+                        }
+
+                    } else if (!Storage::disk('local')->exists($this->chatIdRequest . '_session.txt')) {
                         $this->curlResponse([
-                            'text' => '😶‍🌫️',
-                            'chat_id' => $this->chatIdRequest
+                            'text' => 'silahkan mulai session dengan cara mengetik `/start`',
+                            'chat_id' => $this->chatIdRequest,
+                            'parse_mode' => 'Markdown'
                         ], 'sendMessage', 'application/json');
+
+                        return response()->json([
+                            'info' => "Session " . $this->chatIdRequest . '_session.txt does\'nt exists',
+                            'message' => 'silahkan mulai session dengan cara mengetik `/start`'
+                        ]);
                     }
                 } catch (\Exception $exception) {
                     $this->curlResponse([
