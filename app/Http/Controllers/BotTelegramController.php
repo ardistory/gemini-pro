@@ -172,7 +172,7 @@ class BotTelegramController extends Controller
 
                             $collectionArrayResponse = Collection::make($arrayResponse);
                             $collectionArrayResponse->map(function ($value) {
-                                $this->textResponse .= str_replace("```", "`", $value . "\n");
+                                $this->textResponse .= str_replace("//", "\n", $value . "\n");
                             });
 
                             $this->httpResponse([
