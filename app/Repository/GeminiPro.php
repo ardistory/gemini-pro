@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class GeminiPro
@@ -35,6 +35,29 @@ class GeminiPro
         ]
     ];
     public array $responseText;
+
+    private function validationHttpRequest(): string
+    {
+        if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
+
+            $getSessionFromFile = Storage::disk('local')->get($this->chatIdRequest . '_session.json');
+            $arraySessionFromFile = json_decode($getSessionFromFile, true);
+
+            $arraySessionFromFile['contents'][] = [
+                'role' => 'user',
+                'parts' => [
+                    [
+                        'text' => $this->theQuestion
+                    ]
+                ]
+            ];
+
+            return json_encode($arraySessionFromFile);
+        } else {
+            return json_encode($this->postBody);
+        }
+    }
+
     public static function getWdyt(): array
     {
         return self::$wdyt;
@@ -66,33 +89,11 @@ class GeminiPro
 
     public function generateResponse()
     {
-        $ch = curl_init($this->url);
+        $httpRequest = Http::withHeaders(['Content-Type: application/json'])
+            ->withBody($this->validationHttpRequest())
+            ->post($this->url);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-
-        if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
-
-            $getSessionFromFile = Storage::disk('local')->get($this->chatIdRequest . '_session.json');
-            $arraySessionFromFile = json_decode($getSessionFromFile, true);
-
-            $arraySessionFromFile['contents'][] = [
-                'role' => 'user',
-                'parts' => [
-                    [
-                        'text' => $this->theQuestion
-                    ]
-                ]
-            ];
-
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arraySessionFromFile));
-        } else {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->postBody));
-        }
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($ch);
+        $response = $httpRequest->body();
 
         if ($response) {
             $responseText = json_decode($response, true);

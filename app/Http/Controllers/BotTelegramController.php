@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Repository\GeminiPro;
 use App\Repository\ImageGenerator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -20,26 +19,13 @@ class BotTelegramController extends Controller
     public bool $isContinue = false;
 
 
-    private function curlResponse(array $queryParameter, string $method, string $contentType)
+    private function httpResponse(array $queryParameter, string $method, string $contentType): void
     {
-        $ch = curl_init();
-
-        curl_setopt_array($ch, [
-            CURLOPT_URL => "https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/$method",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($queryParameter),
-            CURLOPT_HTTPHEADER => [
-                "content-type: " . $contentType
-            ],
-        ]);
-
-        $response = curl_exec($ch);
-
-        return $response;
+        Http::withHeaders([
+            "Content-Type: " . $contentType
+        ])
+            ->withBody(json_encode($queryParameter))
+            ->post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/$method");
     }
 
     private function imageResponse(array $postBody, string $method, string $imageBase64)
@@ -91,7 +77,7 @@ class BotTelegramController extends Controller
 
         foreach ($imageGenerator->porbidWord() as $keyword) {
             if (stripos($trimmedTextRequest, $keyword) !== false) {
-                $this->curlResponse([
+                $this->httpResponse([
                     'text' => 'Mengandung kata-kata yang di larang!',
                     'chat_id' => $this->chatIdRequest
                 ], 'sendMessage', 'application/json');
@@ -129,7 +115,7 @@ class BotTelegramController extends Controller
                 $this->usernameRequest = $requestAll['message']['from']['username'];
                 $this->textRequest = $requestAll['message']['text'];
             } catch (\Exception $exception) {
-                $this->curlResponse([
+                $this->httpResponse([
                     'text' => $exception->getMessage(),
                     'chat_id' => $this->chatIdRequest
                 ], 'sendMessage', 'application/json');
@@ -143,7 +129,7 @@ class BotTelegramController extends Controller
 
                     return response()->json(['message' => $response], 200);
                 } catch (\Exception $exception) {
-                    $this->curlResponse([
+                    $this->httpResponse([
                         'text' => $exception->getMessage(),
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
@@ -152,7 +138,7 @@ class BotTelegramController extends Controller
                 try {
                     if ($this->textRequest == '/start') {
                         if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
-                            $this->curlResponse([
+                            $this->httpResponse([
                                 'text' => 'Session exist, bisa langsung ajukan pertanyaan',
                                 'chat_id' => $this->chatIdRequest,
                                 'parse_mode' => 'Markdown'
@@ -164,7 +150,7 @@ class BotTelegramController extends Controller
                             ]);
                         }
 
-                        $this->curlResponse([
+                        $this->httpResponse([
                             'text' => 'session dimulai, silahkan ajukan pertanyaan',
                             'chat_id' => $this->chatIdRequest,
                             'parse_mode' => 'Markdown'
@@ -189,7 +175,7 @@ class BotTelegramController extends Controller
                                 $this->textResponse .= str_replace("```", "`", $value . "\n");
                             });
 
-                            $this->curlResponse([
+                            $this->httpResponse([
                                 'text' => $this->textResponse,
                                 'chat_id' => $this->chatIdRequest,
                                 'parse_mode' => 'Markdown'
@@ -236,14 +222,14 @@ class BotTelegramController extends Controller
 
                             return response()->json($arraySession);
                         } else {
-                            $this->curlResponse([
+                            $this->httpResponse([
                                 'text' => '😶‍🌫️',
                                 'chat_id' => $this->chatIdRequest
                             ], 'sendMessage', 'application/json');
                         }
 
                     } else if (!Storage::disk('local')->exists($this->chatIdRequest . '_session.txt')) {
-                        $this->curlResponse([
+                        $this->httpResponse([
                             'text' => 'silahkan mulai session dengan cara mengetik `/start`',
                             'chat_id' => $this->chatIdRequest,
                             'parse_mode' => 'Markdown'
@@ -255,7 +241,7 @@ class BotTelegramController extends Controller
                         ]);
                     }
                 } catch (\Exception $exception) {
-                    $this->curlResponse([
+                    $this->httpResponse([
                         'text' => $exception->getMessage(),
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
