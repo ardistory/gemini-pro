@@ -35,13 +35,12 @@ class BotTelegramController extends Controller
         if ($imageData !== false) {
             $namaFile = uniqid('pic_') . '.png';
 
-            $tempFilePath = Storage::put('public/' . $namaFile, $imageData);
-            $lokasiFile = storage_path('app/public/' . $namaFile);
+            $tempFilePath = Storage::disk('local')->put($namaFile, $imageData);
             if ($tempFilePath !== false) {
-                $response = Http::attach('photo', file_get_contents($lokasiFile), 'photo.png')
+                $response = Http::attach('photo', file_get_contents(storage_path('app/' . $namaFile)), 'photo.png')
                     ->post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/$method", $postBody);
 
-                Storage::delete('public/' . $namaFile);
+                Storage::disk('local')->delete($namaFile);
 
                 return ($response->successful()) ? 'Photo sent successfully!' : 'Failed to send photo. Error: ' . $response->status();
             } else {
@@ -126,6 +125,11 @@ class BotTelegramController extends Controller
                     $imageGenerator = new ImageGenerator();
 
                     $response = $this->isChatFromOwner($imageGenerator, $this->textRequest);
+
+                    ($response == 'Failed to send photo. Error: 400') ? $this->httpResponse([
+                        'text' => "generate gambar gagal!\nlaporkan bug & masalah lainnya ke IG : @ardistory___",
+                        'chat_id' => $this->chatIdRequest
+                    ], 'sendMessage', 'application/json') : '';
 
                     return response()->json(['message' => $response], 200);
                 } catch (\Exception $exception) {
