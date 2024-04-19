@@ -6,11 +6,13 @@ use App\Repository\GeminiPro;
 use App\Repository\ImageGenerator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class BotTelegramController extends Controller
 {
+    private GeminiPro $geminiPro;
     public string $textResponse = '';
     public string $chatIdRequest = '';
     public string $firstnameRequest = '';
@@ -18,6 +20,10 @@ class BotTelegramController extends Controller
     public string $textRequest = '';
     public bool $isContinue = false;
 
+    public function __construct()
+    {
+        $this->geminiPro = App::make(GeminiPro::class);
+    }
 
     private function httpResponse(array $queryParameter, string $method, string $contentType): void
     {
@@ -103,7 +109,7 @@ class BotTelegramController extends Controller
         return "Safe guest!";
     }
 
-    public function sendResponse(Request $request, GeminiPro $geminiPro)
+    public function sendResponse(Request $request)
     {
         if ($request->header('X-Telegram-Bot-Api-Secret-Token') == 'berserk') {
             $requestAll = $request->all();
@@ -167,9 +173,9 @@ class BotTelegramController extends Controller
                             'message' => 'session dimulai, silahkan ajukan pertanyaan'
                         ]);
                     } else if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
-                        $geminiPro->setChatIdRequest($this->chatIdRequest);
-                        $geminiPro->setQuestion($this->textRequest);
-                        $responseFromGeminiPro = $geminiPro->generateResponse();
+                        $this->geminiPro->setChatIdRequest($this->chatIdRequest);
+                        $this->geminiPro->setQuestion($this->textRequest);
+                        $responseFromGeminiPro = $this->geminiPro->generateResponse();
 
                         if ($responseFromGeminiPro != false) {
                             $arrayResponse = $responseFromGeminiPro['contents'][1]['parts'][0]['text'];
@@ -219,7 +225,7 @@ class BotTelegramController extends Controller
 
                                 Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($arraySessionFromFile, JSON_PRETTY_PRINT));
                             } else {
-                                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($geminiPro->getConversation(), JSON_PRETTY_PRINT));
+                                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($this->geminiPro->getConversation(), JSON_PRETTY_PRINT));
                             }
 
                             $arraySession = json_decode(Storage::get($this->chatIdRequest . '_session.json'), true);
