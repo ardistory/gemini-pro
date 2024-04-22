@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class GeminiPro extends Component
@@ -38,8 +39,9 @@ class GeminiPro extends Component
         }
     }
 
+    #[Title('Dashboard')]
     public function render()
     {
-        return view('livewire.gemini-pro');
+        return view('livewire.dashboard');
     }
 }

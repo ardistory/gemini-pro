@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\GeminiPro;
 use App\Repository\ImageGenerator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
@@ -23,6 +24,14 @@ class BotTelegramController extends Controller
     public function __construct()
     {
         $this->geminiPro = App::make(GeminiPro::class);
+    }
+
+    public function getResponse(): JsonResponse
+    {
+        return response()->json([
+            'Author' => 'Ardi Putra',
+            'GitHub' => 'https://github.com/ardistory'
+        ]);
     }
 
     private function httpResponse(array $queryParameter, string $method, string $contentType): void

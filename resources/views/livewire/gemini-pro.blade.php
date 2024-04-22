@@ -1,4 +1,4 @@
-<div class="w-[90%] md:w-[50%] mt-10 mb-10">
+<div class="w-[90%] md:w-[50%] flex flex-col items-center justify-center">
     <div class="w-full flex justify-center font-semibold text-2xl">
         <div class="relative">
             <span>@@ardiStory___</span>
@@ -10,7 +10,6 @@
     </div>
     <div class="mt-4">
         @foreach ($responseText as $response)
-            {{-- @dd($response) --}}
             <span class="w-full inline-flex justify-end font-semibold">User</span>
             <div class="flex justify-end">
                 <div class="flex justify-end w-[90%]">

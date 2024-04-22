@@ -2,24 +2,19 @@
 
 use App\Http\Controllers\AlarmController;
 use App\Http\Controllers\BotTelegramController;
+use App\Livewire\GeminiPro;
+use App\Livewire\Landingpage;
+use App\Livewire\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->redirectTo('/gemini-pro');
-});
+Route::get('/', Landingpage::class)->name('landingpage');
+Route::get('/dashboard', GeminiPro::class)->name('dashboard');
+Route::get('/login', Login::class)->name('login');
 
-Route::get('/eloquent', function () {
-    return response()->view('eloquent');
-});
+// Bot Telegram -----------------------------------------------------------------------------
 
-Route::get('/gemini-pro', function () {
-    return response()->view('gemini-pro');
-});
-
-Route::get('/telegram-webhook', function () {
-    return response()->json(['message' => 'welcome!']);
-});
+Route::get('/telegram-webhook', [BotTelegramController::class, 'getResponse']);
 
 Route::post('/telegram-webhook', [BotTelegramController::class, 'sendResponse']);
 

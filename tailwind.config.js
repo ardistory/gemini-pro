@@ -8,6 +8,12 @@ export default {
     extend: {
       fontFamily: {
         'Inter': ['Inter']
+      },
+      colors: {
+        'white-vite': '#DFDFD6',
+        'black-vite': '#1B1B1F',
+        'pink-vite': '#bd34fe',
+        'blue-vite': '#47caff'
       }
     },
   },
