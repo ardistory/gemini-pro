@@ -42,6 +42,6 @@ class GeminiPro extends Component
     #[Title('Dashboard')]
     public function render()
     {
-        return view('livewire.dashboard');
+        return view('livewire.gemini-pro');
     }
 }

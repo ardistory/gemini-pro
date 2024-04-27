@@ -32,7 +32,7 @@
                     </strong>
 
                     @foreach ($menus as $menu)
-                        <a wire:navigate href="{{ $menu['url'] }}"
+                        <a @if ($menu['title'] != 'Support') wire:navigate @endif href="{{ $menu['url'] }}"
                             class="@if (Route::current()->uri == $menu['url']) bg-gray-800 @endif block rounded-lg px-4 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-gray-300"
                             role="menuitem">
                             {{ $menu['title'] }}
@@ -57,11 +57,10 @@
                         AUTHENTICATE
                     </strong>
 
-                    <button
-                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text"
-                        role="menuitem">
+                    <a wire:navigate href="{{ route('login') }}"
+                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
                         Login
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
