@@ -1,7 +1,9 @@
 <div class="select-none relative w-full h-screen flex items-center justify-center">
-    <img class="absolute -z-50 left-0 top-0 w-full h-screen user-drag-none"
-        src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}">
-    <div class="mx-5 md:mx-0 bg-white/[0.1] backdrop-blur-sm p-5 rounded-xl max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div class="absolute w-full h-screen overflow-hidden">
+        <img class="left-0 top-0 w-auto md:w-full h-full user-drag-none"
+            src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}">
+    </div>
+    <div class="mx-5 md:mx-0 bg-white/[0.01] backdrop-blur-sm p-5 rounded-xl max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg text-center">
             <h1 class="text-2xl font-bold sm:text-3xl">Get started today!</h1>
 
@@ -53,7 +55,7 @@
             <div class="flex items-center justify-between">
                 <p class="text-sm text-white-vite">
                     No account?
-                    <a class="underline" href="#">Sign up</a>
+                    <a wire:navigate class="underline" href="{{ route('register') }}">Register</a>
                 </p>
 
                 <button type="submit"

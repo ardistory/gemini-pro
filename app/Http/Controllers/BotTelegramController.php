@@ -130,7 +130,7 @@ class BotTelegramController extends Controller
                 $this->textRequest = $requestAll['message']['text'];
             } catch (\Exception $exception) {
                 $this->httpResponse([
-                    'text' => $exception->getMessage(),
+                    'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
                     'chat_id' => $this->chatIdRequest
                 ], 'sendMessage', 'application/json');
             }
@@ -149,7 +149,7 @@ class BotTelegramController extends Controller
                     return response()->json(['message' => $response], 200);
                 } catch (\Exception $exception) {
                     $this->httpResponse([
-                        'text' => $exception->getMessage(),
+                        'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
                 }
@@ -175,7 +175,28 @@ class BotTelegramController extends Controller
                             'parse_mode' => 'Markdown'
                         ], 'sendMessage', 'application/json');
 
-                        Storage::disk('local')->put($this->chatIdRequest . '_session.json', '');
+                        $safetySettings = [
+                            "safetySettings" => [
+                                [
+                                    "category" => "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                                    "threshold" => "BLOCK_NONE"
+                                ],
+                                [
+                                    "category" => "HARM_CATEGORY_HATE_SPEECH",
+                                    "threshold" => "BLOCK_NONE"
+                                ],
+                                [
+                                    "category" => "HARM_CATEGORY_HARASSMENT",
+                                    "threshold" => "BLOCK_NONE"
+                                ],
+                                [
+                                    "category" => "HARM_CATEGORY_DANGEROUS_CONTENT",
+                                    "threshold" => "BLOCK_NONE"
+                                ]
+                            ]
+                        ];
+
+                        Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($safetySettings, JSON_PRETTY_PRINT));
 
                         return response()->json([
                             'info' => "Created new session : " . $this->chatIdRequest . '_session.json',
@@ -226,8 +247,20 @@ class BotTelegramController extends Controller
                                 if (!isset($arraySessionFromFile['safetySettings'])) {
                                     $arraySessionFromFile['safetySettings'][] = [
                                         [
+                                            "category" => "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                                            "threshold" => "BLOCK_NONE"
+                                        ],
+                                        [
+                                            "category" => "HARM_CATEGORY_HATE_SPEECH",
+                                            "threshold" => "BLOCK_NONE"
+                                        ],
+                                        [
+                                            "category" => "HARM_CATEGORY_HARASSMENT",
+                                            "threshold" => "BLOCK_NONE"
+                                        ],
+                                        [
                                             "category" => "HARM_CATEGORY_DANGEROUS_CONTENT",
-                                            "threshold" => "BLOCK_ONLY_HIGH"
+                                            "threshold" => "BLOCK_NONE"
                                         ]
                                     ];
                                 }
@@ -261,7 +294,7 @@ class BotTelegramController extends Controller
                     }
                 } catch (\Exception $exception) {
                     $this->httpResponse([
-                        'text' => $exception->getMessage(),
+                        'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
                 }
