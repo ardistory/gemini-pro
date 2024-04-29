@@ -65,4 +65,15 @@
             </div>
         </form>
     </div>
+
+    <div x-data="{ notifRegister: {{ session('notifRegister') ? true : false }} }" x-show="notifRegister"
+        class="fixed top-2 z-50 rounded border-s-4 border-green-500 bg-green-50 p-4 flex items-center gap-2">
+        <strong class="block font-medium text-green-800">registration was successful</strong>
+        <div class="text-green-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </div>
+    </div>
 </div>

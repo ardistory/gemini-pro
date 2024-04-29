@@ -20,10 +20,11 @@
                 <path x-show="showNavbar" stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
         </div>
-        <div x-show="showNavbar" x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90" class="relative">
+        <div x-show="showNavbar" x-on:click.away="showNavbar = false"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
+            x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+            class="relative">
             <div class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-800 rounded-md border border-gray-800 bg-black-vite shadow-lg"
                 role="menu">
                 <div class="p-2">

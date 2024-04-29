@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     @vite('resources/css/app.css')
+    <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-black-vite text-white-vite font-Inter">
@@ -19,6 +19,8 @@
         {{ $slot }}
         <livewire:partials.footer>
             @vite('resources/js/app.js')
+            <script src="{{ asset('js/iziToast.js') }}"></script>
+            @include('vendor.lara-izitoast.toast')
 </body>
 
 </html>

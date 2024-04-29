@@ -1,5 +1,5 @@
-<div class="fixed bottom-0 left-0 w-full flex justify-center p-5">
-    <ul class="mt-8 flex justify-center gap-6 sm:mt-0 lg:justify-end">
+<div class="fixed bottom-0 right-0 w-[50px] flex justify-end p-3">
+    <ul class="flex justify-center">
         <li>
             <a href="https://github.com/ardistory" rel="noreferrer" target="_blank"
                 class="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
