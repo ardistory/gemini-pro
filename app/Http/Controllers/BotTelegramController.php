@@ -202,6 +202,23 @@ class BotTelegramController extends Controller
                             'info' => "Created new session : " . $this->chatIdRequest . '_session.json',
                             'message' => 'session dimulai, silahkan ajukan pertanyaan'
                         ]);
+                    } else if ($this->textRequest == '/clearSession') {
+                        $allFiles = Storage::disk('local')->allFiles();
+
+                        foreach ($allFiles as $file) {
+                            if (str_ends_with($file, '.json')) {
+                                Storage::disk('local')->delete($file);
+
+                                $this->httpResponse([
+                                    'text' => $file . " deleted",
+                                    'chat_id' => $this->chatIdRequest
+                                ], 'sendMessage', 'application/json');
+                            }
+                        }
+
+                        return response()->json([
+                            'status' => 'session cleared'
+                        ]);
                     } else if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
                         $this->geminiPro->setChatIdRequest($this->chatIdRequest);
                         $this->geminiPro->setQuestion($this->textRequest);

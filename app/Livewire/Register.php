@@ -29,15 +29,24 @@ class Register extends Component
     public function register()
     {
         try {
-            $user = User::query()->create($this->validate());
+            $checkAccount = User::query()->where('username', '=', $this->username ?? '')->orWhere('email', '=', $this->email ?? '')->first();
 
-            $user->sendEmailVerificationNotification();
+            if ($checkAccount == null) {
+                $user = User::query()->create($this->validate());
 
-            notify('registration was successful', 'Success!', 'success', 'topCenter');
+                $user->sendEmailVerificationNotification();
 
-            redirect()->route('login');
+                notify('registration was successful', 'Success!', 'success', 'topRight');
+
+                redirect()->route('login');
+
+            } else {
+                notify('Account has been registered', 'Failed!', 'error', 'topLeft');
+
+                redirect()->route('register');
+            }
         } catch (\Exception $exception) {
-            notify('registration failed', 'Failed!', 'error', 'topCenter');
+            notify("Register failed : " . $exception->getLine(), 'Failed!', 'error', 'topLeft');
 
             redirect()->route('register');
         }

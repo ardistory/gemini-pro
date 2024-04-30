@@ -13,6 +13,7 @@ use App\Livewire\Register;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landingpage::class)->name('landingpage');
@@ -22,6 +23,12 @@ Route::middleware([Authenticate::class, EnsureEmailIsVerified::class])->group(fu
     Route::get('/api', Register::class)->name('api');
     Route::get('/test', Register::class)->name('test');
 });
+
+Route::get('/logout', function () {
+    Auth::logout();
+
+    return redirect()->route('login');
+})->name('logout');
 
 Route::middleware([RedirectIfAuthenticated::class])->group(function () {
     Route::get('/login', Login::class)->name('login');

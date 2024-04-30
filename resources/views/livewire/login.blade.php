@@ -1,9 +1,11 @@
-<div class="select-none relative w-full h-screen flex items-center justify-center">
+<div
+    class="select-none relative w-full h-screen flex items-center justify-center before:w-96 before:h-96 before:bg-gradient-to-br before:from-blue-vite before:from-50% before:to-pink-vite before:to-50% before:block before:fixed before:top-[50%] before:bottom-0 before:-z-10 before:rounded-full before:blur-[200px]">
     <div class="absolute w-full h-screen overflow-hidden">
-        <img class="left-0 top-0 w-auto md:w-full h-full user-drag-none"
+        <img class="left-0 top-0 w-auto md:w-full h-full user-drag-none opacity-50"
             src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}">
     </div>
-    <div class="mx-5 md:mx-0 bg-white/[0.01] backdrop-blur-sm p-5 rounded-xl max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <div
+        class="mx-5 md:mx-0 bg-white/[0.01] backdrop-blur-sm p-5 border-b border-l border-white/25 rounded-xl max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg text-center">
             <h1 class="text-2xl font-bold sm:text-3xl">Get started today!</h1>
 
@@ -18,7 +20,7 @@
                 <label for="username" class="sr-only">Username</label>
 
                 <div class="relative">
-                    <input wire:model.live='username' type="text"
+                    <input wire:model.live='username' type="text" value="{{ old('username') }}"
                         class="text-black w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         placeholder="Enter username" />
                     @error('username')

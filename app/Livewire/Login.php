@@ -17,12 +17,13 @@ class Login extends Component
     public function login()
     {
         if (Auth::attempt($this->validate(), true)) {
-            notify('Login successful', 'Success!', 'success', 'topCenter');
+            notify('Login successful', 'Success!', 'success', 'topRight');
 
             redirect()->route('dashboard');
         } else {
             redirect()->route('login');
-            notify('Login failed', 'Error!', 'error', 'topCenter');
+
+            notify('Login failed', 'Error!', 'error', 'topLeft');
         }
     }
 

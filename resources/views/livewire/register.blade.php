@@ -2,10 +2,14 @@
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
             <img src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}"
-                class="user-drag-none absolute inset-0 h-full w-full object-cover opacity-80" />
+                class="user-drag-none absolute inset-0 h-full w-full object-cover opacity-50" />
             <div class="hidden lg:relative lg:block lg:p-12">
-                <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                    Register your account
+                <h2 class="text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+                    <div
+                        class="inline-block bg-gradient-to-r py-2 from-blue-vite to-pink-vite bg-clip-text text-transparent">
+                        Register
+                    </div>
+                    your account
                 </h2>
             </div>
         </section>
@@ -19,7 +23,7 @@
                             Username
                         </label>
 
-                        <input wire:model.live='username' type="text" id="Username"
+                        <input wire:model.live='username' type="text" id="Username" placeholder="lionelpessi1"
                             class="mt-1 w-full rounded-md @error('username') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('username')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -33,7 +37,7 @@
                             Firstname
                         </label>
 
-                        <input wire:model.live='first_name' type="text" id="Firstname"
+                        <input wire:model.live='first_name' type="text" id="Firstname" placeholder="lionel"
                             class="mt-1 w-full rounded-md @error('first_name') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('first_name')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -44,7 +48,7 @@
                             Lastname
                         </label>
 
-                        <input wire:model.live='last_name' type="text" id="Username"
+                        <input wire:model.live='last_name' type="text" id="Username" placeholder="pessi"
                             class="mt-1 w-full rounded-md @error('last_name') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('last_name')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -56,6 +60,7 @@
                         <label for="Email" class="block text-sm font-medium text-white-vite"> Email </label>
 
                         <input wire:model.live='email' type="email" id="Email"
+                            placeholder="lionelpessi@bumn.co.id"
                             class="mt-1 w-full rounded-md @error('email') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('email')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -68,6 +73,7 @@
                         </label>
 
                         <input wire:model.live='password_confirmation' type="password" id="password_confirmation"
+                            placeholder="********"
                             class="mt-1 w-full rounded-md @error('password') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('password_confirmation')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -77,7 +83,7 @@
                     <div class="col-span-10">
                         <label for="Password" class="block text-sm font-medium text-white-vite">Repeat Password </label>
 
-                        <input wire:model.live='password' type="password" id="Password"
+                        <input wire:model.live='password' type="password" id="Password" placeholder="********"
                             class="mt-1 w-full rounded-md @error('password') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('password')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -86,7 +92,7 @@
 
                     <div class="col-span-10 flex flex-col items-center sm:gap-4 relative">
                         <button type="submit"
-                            class="inline-block shrink-0 rounded-md bg-gradient-to-r from-zinc-700 to-black px-12 py-3 text-sm font-medium text-white-vite hover:bg-gradient-to-r border-t-[1px] focus:outline-none transition-all duration-300 before:w-44 before:h-10 before:bg-white before:block before:absolute before:top-0 before:blur-2xl before:translate-y-7 before:-z-50 before:hover:blur-[100px] before:transition-all before:duration-500">
+                            class="inline-block shrink-0 rounded-md bg-gradient-to-r from-zinc-700 to-black px-12 py-3 text-sm font-medium text-white-vite hover:bg-gradient-to-r border-t-[1px] border-white-vite focus:outline-none transition-all duration-300 before:w-44 before:h-10 before:bg-white before:block before:absolute before:top-0 before:blur-2xl before:translate-y-7 before:-z-50 before:hover:blur-[100px] before:transition-all before:duration-500">
                             Create an account
                         </button>
 
@@ -98,5 +104,8 @@
                 </form>
             </div>
         </main>
+    </div>
+    <div wire:loading wire:target='register'
+        class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-50 backdrop-blur-sm animate-pulse">
     </div>
 </div>
