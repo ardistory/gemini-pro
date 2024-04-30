@@ -1,17 +1,19 @@
 <div>
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <section class="relative flex h-32 items-end lg:col-span-5 lg:h-full xl:col-span-6">
-            <img alt="" src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}"
-                class="absolute inset-0 h-full w-full object-cover opacity-80" />
+            <img src="{{ asset('assets/img/Paint_Drip_Wallpaper_Final2.png') }}"
+                class="user-drag-none absolute inset-0 h-full w-full object-cover opacity-80" />
+            <div class="hidden lg:relative lg:block lg:p-12">
+                <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+                    Register your account
+                </h2>
+            </div>
         </section>
 
         <main
             class="backdrop-blur-sm flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
             <div class="max-w-xl lg:max-w-3xl">
-                <h2 class="text-2xl font-bold text-white-vite sm:text-3xl md:text-4xl">
-                    Register your account
-                </h2>
-                <form wire:submit='login' class="relative mt-8 grid grid-cols-10 gap-4 w-full">
+                <form wire:submit='register' class="relative grid mt-6 grid-cols-10 gap-5 w-full">
                     <div class="col-span-10">
                         <label for="Username" class="block text-sm font-medium text-white-vite">
                             Username
@@ -60,7 +62,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-5">
+                    <div class="col-span-10">
                         <label for="password_confirmation" class="block text-sm font-medium text-white-vite">
                             Password
                         </label>
@@ -72,7 +74,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-5">
+                    <div class="col-span-10">
                         <label for="Password" class="block text-sm font-medium text-white-vite">Repeat Password </label>
 
                         <input wire:model.live='password' type="password" id="Password"

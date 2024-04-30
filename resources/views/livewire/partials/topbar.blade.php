@@ -33,7 +33,8 @@
                     </strong>
 
                     @foreach ($menus as $menu)
-                        <a @if ($menu['title'] != 'Support') wire:navigate @endif href="{{ $menu['url'] }}"
+                        <a @if ($menu['title'] != 'Support') wire:navigate @endif
+                            href="{{ $menu['title'] != 'Support' ? $menu['url'] : null }}"
                             class="@if (Route::current()->uri == $menu['url']) bg-gray-800 @endif block rounded-lg px-4 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-gray-300"
                             role="menuitem">
                             {{ $menu['title'] }}

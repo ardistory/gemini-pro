@@ -13,20 +13,22 @@
             </p>
         </div>
 
-        <form action="#" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+        <form wire:submit='login' class="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
-                <label for="email" class="sr-only">Email</label>
+                <label for="username" class="sr-only">Username</label>
 
                 <div class="relative">
-                    <input type="email"
+                    <input wire:model.live='username' type="text"
                         class="text-black w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                        placeholder="Enter email" />
-
+                        placeholder="Enter username" />
+                    @error('username')
+                        <div class="absolute text-xs font-semibold text-red-500">{{ $message }}</div>
+                    @enderror
                     <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                         </svg>
                     </span>
                 </div>
@@ -36,17 +38,17 @@
                 <label for="password" class="sr-only">Password</label>
 
                 <div class="relative">
-                    <input type="password"
+                    <input wire:model.live='password' type="password"
                         class="text-black w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                         placeholder="Enter password" />
-
+                    @error('password')
+                        <div class="absolute text-xs font-semibold text-red-500">{{ $message }}</div>
+                    @enderror
                     <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
                         </svg>
                     </span>
                 </div>
@@ -64,16 +66,5 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <div x-data="{ notifRegister: {{ session('notifRegister') ? true : false }} }" x-show="notifRegister"
-        class="fixed top-2 z-50 rounded border-s-4 border-green-500 bg-green-50 p-4 flex items-center gap-2">
-        <strong class="block font-medium text-green-800">registration was successful</strong>
-        <div class="text-green-800">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-        </div>
     </div>
 </div>

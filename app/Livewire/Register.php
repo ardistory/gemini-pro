@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -25,10 +26,12 @@ class Register extends Component
 
     public bool $isTaken = false;
 
-    public function login()
+    public function register()
     {
         try {
-            User::query()->create($this->validate());
+            $user = User::query()->create($this->validate());
+
+            $user->sendEmailVerificationNotification();
 
             notify('registration was successful', 'Success!', 'success', 'topCenter');
 
