@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\GeminiProServiceProvider::class,
+        App\Providers\ImageGeneratorServiceProvider::class,
         LaraIzitoast\LaraIzitoastServiceProvider::class,
     ])->toArray(),
 

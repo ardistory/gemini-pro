@@ -66,8 +66,10 @@ class BotTelegramController extends Controller
         }
     }
 
-    private function isChatFromOwner(ImageGenerator $imageGenerator, string $prompt)
+    private function isChatFromOwner(string $prompt)
     {
+        $imageGenerator = App::make(ImageGenerator::class);
+
         $trimmedTextRequest = str_ireplace("img:", "", $prompt);
 
         if ($this->chatIdRequest == env('CHAT_ID_OWNER')) {
@@ -139,7 +141,7 @@ class BotTelegramController extends Controller
                 try {
                     $imageGenerator = new ImageGenerator();
 
-                    $response = $this->isChatFromOwner($imageGenerator, $this->textRequest);
+                    $response = $this->isChatFromOwner($this->textRequest);
 
                     ($response == 'Failed to send photo. Error: 400') ? $this->httpResponse([
                         'text' => "generate gambar gagal!\nlaporkan bug & masalah lainnya ke IG : @ardistory___",

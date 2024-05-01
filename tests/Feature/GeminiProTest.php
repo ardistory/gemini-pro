@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Repository\GeminiPro;
+use App\Repository\ImageGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\App;
@@ -16,5 +17,13 @@ class GeminiProTest extends TestCase
         $geminiPro2 = App::make(GeminiPro::class);
 
         $this->assertSame($geminiPro1, $geminiPro2);
+    }
+
+    public function testImageGenerator()
+    {
+        $imageGenerator1 = App::make(ImageGenerator::class);
+        $imageGenerator2 = App::make(ImageGenerator::class);
+
+        $this->assertSame($imageGenerator1, $imageGenerator2);
     }
 }
