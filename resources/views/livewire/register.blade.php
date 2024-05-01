@@ -23,7 +23,7 @@
                             Username
                         </label>
 
-                        <input wire:model.live='username' type="text" id="Username" placeholder="lionelpessi1"
+                        <input wire:model.live='username' type="text" id="Username" placeholder="ardiputra123"
                             class="mt-1 w-full rounded-md @error('username') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('username')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -37,7 +37,7 @@
                             Firstname
                         </label>
 
-                        <input wire:model.live='first_name' type="text" id="Firstname" placeholder="lionel"
+                        <input wire:model.live='first_name' type="text" id="Firstname" placeholder="Ardi"
                             class="mt-1 w-full rounded-md @error('first_name') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('first_name')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -48,7 +48,7 @@
                             Lastname
                         </label>
 
-                        <input wire:model.live='last_name' type="text" id="Username" placeholder="pessi"
+                        <input wire:model.live='last_name' type="text" id="Username" placeholder="Putra"
                             class="mt-1 w-full rounded-md @error('last_name') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('last_name')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>
@@ -59,8 +59,7 @@
                         class="col-span-10 before:w-96 before:h-96 before:bg-gradient-to-br before:from-blue-vite before:from-50% before:to-pink-vite before:to-50% before:block before:absolute before:-z-50 before:rounded-full before:top-[10%] before:left-[10%] before:blur-[200px]">
                         <label for="Email" class="block text-sm font-medium text-white-vite"> Email </label>
 
-                        <input wire:model.live='email' type="email" id="Email"
-                            placeholder="lionelpessi@bumn.co.id"
+                        <input wire:model.live='email' type="email" id="Email" placeholder="ardiputra@domain.com"
                             class="mt-1 w-full rounded-md @error('email') border-red-500 ring-1 ring-red-500 @else border-gray-200 @enderror bg-white text-sm text-black-vite shadow-sm" />
                         @error('email')
                             <div class="absolute text-xs text-red-500 font-medium">{{ $message }}</div>

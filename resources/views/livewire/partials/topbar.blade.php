@@ -82,7 +82,7 @@
         <div class="flex gap-5">
             @foreach ($menus as $menu)
                 <a @if ($menu['title'] != 'Support') wire:navigate @endif wire:key='{{ $menu['title'] }}'
-                    class="font-medium hover:text-[#9099FF] px-2 hover:rounded-full flex items-center gap-1"
+                    class="@if (ucfirst(Route::current()->uri) == $menu['title']) bg-white-vite/5 @endif rounded-md font-medium hover:text-[#9099FF] px-2 flex items-center gap-1"
                     href="{{ $menu['url'] }}">
                     <div>
                         {!! $menu['svg'] !!}

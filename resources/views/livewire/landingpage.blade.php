@@ -1,4 +1,4 @@
-<div class="w-full min-h-screen flex flex-col md:flex-row justify-around items-center">
+<div class="w-full min-h-screen flex flex-col md:flex-row justify-around items-center mb-10">
     <div
         class="mt-[10%] mb-[10%] text-center min-h-[50%] flex flex-col items-center justify-center before:w-32 before:h-32 before:bg-white before:absolute before:-z-50 before:rounded-full before:blur-[150px]">
         <p
