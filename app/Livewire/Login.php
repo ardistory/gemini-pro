@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Events\UserLogin;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -17,6 +18,8 @@ class Login extends Component
     public function login()
     {
         if (Auth::attempt($this->validate(), true)) {
+            event(new UserLogin($this->validate()));
+
             notify('Login successful', 'Success!', 'success', 'topRight');
 
             redirect()->route('dashboard');

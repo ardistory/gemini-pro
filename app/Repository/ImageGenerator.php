@@ -17,16 +17,22 @@ class ImageGenerator
 
     public function generateImage()
     {
-        $httpRequestImage = Http::withHeader("X-RapidAPI-Key", env('RAPID_API'))
-            ->withHeader("Content-Type", "application/json")
-            ->withBody(json_encode([
-                'negative_prompt' => '',
-                'prompt' => $this->prompt,
-                'width' => 512,
-                'height' => 512,
-                'hr_scale' => 2
-            ]))
-            ->post("https://imageai-generator.p.rapidapi.com/image");
+        $headers = [
+            'X-RapidAPI-Key' => env('RAPID_API'),
+            'Content-Type' => 'application/json'
+        ];
+
+        $postBody = [
+            'negative_prompt' => '',
+            'prompt' => $this->prompt,
+            'width' => 512,
+            'height' => 512,
+            'hr_scale' => 2
+        ];
+
+        $url = 'https://imageai-generator.p.rapidapi.com/image';
+
+        $httpRequestImage = Http::withHeaders($headers)->withBody(json_encode($postBody))->post($url);
 
         $response = $httpRequestImage->body();
 
