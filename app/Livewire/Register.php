@@ -34,7 +34,7 @@ class Register extends Component
             if ($checkAccount == null) {
                 $user = User::query()->create($this->validate());
 
-                $user->sendEmailVerificationNotification();
+                event(new Registered($user));
 
                 notify('registration was successful', 'Success!', 'success', 'topRight');
 
