@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Partials;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Topbar extends Component
@@ -49,6 +50,15 @@ class Topbar extends Component
             </div>'
             ]
         ];
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        notify('account has been logged out', 'Info!', 'info', 'topCenter');
+
+        return redirect()->route('login');
     }
 
     public function render()

@@ -62,10 +62,10 @@
                     </strong>
 
                     @auth
-                        <a wire:navigate href="{{ route('logout') }}"
+                        <button wire:click='logout'
                             class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
                             Logout
-                        </a>
+                        </button>
                     @else
                         <a wire:navigate href="{{ route('login') }}"
                             class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
@@ -94,9 +94,15 @@
         <div class="flex gap-2 items-center">
             @auth
                 <div x-data="{ showNavbarDesktop: false }">
-                    <img x-on:click="showNavbarDesktop = !showNavbarDesktop"
-                        class="w-10 h-10 rounded-full ring-1 ring-white-vite/10 cursor-pointer"
-                        src="{{ asset('assets/img/Griffith-red-blue.jpg') }}" alt="photo-profile">
+                    <div x-on:click="showNavbarDesktop = !showNavbarDesktop"
+                        class="w-10 h-10 flex items-center justify-center cursor-pointer">
+                        <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="w-6 h-6">
+                            <path fill-rule="evenodd"
+                                d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
                     <div x-show="showNavbarDesktop" x-on:click.away="showNavbarDesktop = false"
                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
                         x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
@@ -123,10 +129,10 @@
                                 </strong>
 
                                 @auth
-                                    <a wire:navigate href="{{ route('logout') }}"
-                                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-red-500 hover:to-yellow-500 bg-gradient-to-r from-red-500 to-orange-500 text-transparent bg-clip-text">
+                                    <button wire:click='logout'
+                                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm bg-red-500">
                                         Logout
-                                    </a>
+                                    </button>
                                 @else
                                     <a wire:navigate href="{{ route('login') }}"
                                         class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">

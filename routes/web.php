@@ -24,12 +24,6 @@ Route::middleware([Authenticate::class, EnsureEmailIsVerified::class])->group(fu
     Route::get('/test', Register::class)->name('test');
 });
 
-Route::get('/logout', function () {
-    Auth::logout();
-
-    return redirect()->route('login');
-})->name('logout');
-
 Route::middleware([RedirectIfAuthenticated::class])->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/register', Register::class)->name('register');
