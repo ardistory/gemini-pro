@@ -8,5 +8,8 @@
         <button wire:click='refresh' class="mt-2 bg-gradient-to-br from-blue-vite to-pink-vite px-2 rounded-md">
             Refresh
         </button>
+        <button wire:click='resend' class="mt-2 bg-gradient-to-br from-blue-vite to-pink-vite px-2 rounded-md">
+            Resend Email Verification
+        </button>
     </div>
 </div>

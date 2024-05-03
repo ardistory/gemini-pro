@@ -4,6 +4,7 @@ use App\Http\Controllers\AlarmController;
 use App\Http\Controllers\BotTelegramController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\RedirectIfVerified;
 use App\Livewire\Dashboard;
 use App\Livewire\Partials\EmailNotice;
 use App\Livewire\Landingpage;
@@ -31,9 +32,11 @@ Route::middleware([RedirectIfAuthenticated::class])->group(function () {
 
 // Verifikasi Email
 
-Route::get('/email/verify', EmailNotice::class)->name('verification.notice')->middleware(['auth']);
+Route::get('/email/verify', EmailNotice::class)->name('verification.notice')->middleware(['auth', RedirectIfVerified::class]);
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
+
+    notify('Verification success', 'Success!', 'success');
 
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');

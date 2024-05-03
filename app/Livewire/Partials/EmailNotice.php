@@ -3,6 +3,7 @@
 namespace App\Livewire\Partials;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -21,6 +22,17 @@ class EmailNotice extends Component
 
             redirect()->route('verification.notice');
         }
+    }
+
+    public function resend()
+    {
+        $user = User::find(Auth::user()->username)->first();
+
+        event(new Registered($user));
+
+        notify('Email sent!', 'Success!', 'success');
+
+        return redirect()->route('verification.notice');
     }
 
     public function render()
