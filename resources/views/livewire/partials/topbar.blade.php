@@ -8,7 +8,7 @@
                         clip-rule="evenodd" />
                 </svg>
             </div>
-            <a wire:navigate href="/" class="font-medium hover:text-[#9099FF]" href="">ArdiPutra</a>
+            <a wire:navigate href="/" class="font-bold text-xl hover:text-[#9099FF]">ArdiPutra</a>
         </span>
     </div>
 
@@ -93,63 +93,62 @@
         </div>
         <div class="flex gap-2 items-center">
             @auth
-                <div x-data="{ showNavbarDesktop: false }">
-                    <div x-on:click="showNavbarDesktop = !showNavbarDesktop"
-                        class="w-10 h-10 flex items-center justify-center cursor-pointer">
-                        <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="w-6 h-6">
-                            <path fill-rule="evenodd"
-                                d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div x-show="showNavbarDesktop" x-on:click.away="showNavbarDesktop = false"
-                        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90"
-                        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="relative">
-                        <div class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-800 rounded-md border border-gray-800 bg-black-vite shadow-lg"
-                            role="menu">
-                            @auth
+                <livewire:partials.alert-topbar>
+                    <div x-data="{ showNavbarDesktop: false }">
+                        <div x-on:click="showNavbarDesktop = !showNavbarDesktop"
+                            class="w-10 h-10 flex items-center justify-center cursor-pointer">
+                            <img class="rounded-full" src="{{ asset('assets/img/Griffith-red-blue.jpg') }}">
+                        </div>
+                        <div x-show="showNavbarDesktop" x-on:click.away="showNavbarDesktop = false"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                            class="relative">
+                            <div class="absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-800 rounded-md border border-gray-800 bg-black-vite shadow-lg"
+                                role="menu">
+                                @auth
+                                    <div class="p-2">
+                                        <strong
+                                            class="block p-2 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
+                                            General
+                                        </strong>
+
+                                        <a href="#"
+                                            class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                                            role="menuitem">
+                                            Settings
+                                        </a>
+                                    </div>
+                                @endauth
                                 <div class="p-2">
-                                    <strong class="block p-2 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
-                                        General
+                                    <strong
+                                        class="block p-2 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
+                                        AUTHENTICATE
                                     </strong>
 
-                                    <a href="#"
-                                        class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                                        role="menuitem">
-                                        Settings
-                                    </a>
+                                    @auth
+                                        <button wire:click='logout'
+                                            class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm bg-red-500">
+                                            Logout
+                                        </button>
+                                    @else
+                                        <a wire:navigate href="{{ route('login') }}"
+                                            class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
+                                            Login
+                                        </a>
+                                    @endauth
                                 </div>
-                            @endauth
-                            <div class="p-2">
-                                <strong class="block p-2 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
-                                    AUTHENTICATE
-                                </strong>
-
-                                @auth
-                                    <button wire:click='logout'
-                                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm bg-red-500">
-                                        Logout
-                                    </button>
-                                @else
-                                    <a wire:navigate href="{{ route('login') }}"
-                                        class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
-                                        Login
-                                    </a>
-                                @endauth
                             </div>
                         </div>
                     </div>
-                </div>
-            @else
-                <a wire:navigate
-                    class="font-medium hover:text-[#9099FF] px-2 hover:rounded-full bg-gradient-to-b from-blue-vite to-pink-vite bg-clip-text text-transparent"
-                    href="{{ route('login') }}">
-                    Login
-                </a>
-            @endauth
+                @else
+                    <a wire:navigate
+                        class="font-medium hover:text-[#9099FF] px-2 hover:rounded-full bg-gradient-to-b from-blue-vite to-pink-vite bg-clip-text text-transparent"
+                        href="{{ route('login') }}">
+                        Login
+                    </a>
+                @endauth
         </div>
     </div>
 </div>
