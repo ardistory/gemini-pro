@@ -16,8 +16,8 @@ class MostUseApi
     public function build(): \ArielMejiaDev\LarapexCharts\LineChart
     {
         return $this->chart->lineChart()
-            ->addData('Text AI', [40, 93, 35, 42, 18, 82])
-            ->addData('Image AI', [70, 29, 77, 28, 55, 45])
+            ->addData('Text AI', [4, 9, 3, 4, 1, 8])
+            ->addData('Image AI', [7, 2, 7, 2, 5, 4])
             ->setTitle('Application usage data')
             ->setSubtitle('Text AI vs Image AI')
             ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June']);

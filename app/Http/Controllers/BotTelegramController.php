@@ -129,7 +129,7 @@ class BotTelegramController extends Controller
                 $this->chatIdRequest = $requestAll['message']['from']['id'];
                 $this->firstnameRequest = $requestAll['message']['from']['first_name'];
                 $this->usernameRequest = $requestAll['message']['from']['username'];
-                $this->textRequest = $requestAll['message']['text'];
+                $this->textRequest = strtolower($requestAll['message']['text']);
             } catch (\Exception $exception) {
                 $this->httpResponse([
                     'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',

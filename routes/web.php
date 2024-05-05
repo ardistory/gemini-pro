@@ -5,6 +5,7 @@ use App\Http\Controllers\BotTelegramController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfVerified;
+use App\Livewire\Api;
 use App\Livewire\Dashboard;
 use App\Livewire\Partials\EmailNotice;
 use App\Livewire\Landingpage;
@@ -21,7 +22,7 @@ Route::get('/', Landingpage::class)->name('landingpage');
 
 Route::middleware([Authenticate::class, EnsureEmailIsVerified::class])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/api', Register::class)->name('api');
+    Route::get('/api', Api::class)->name('api');
     Route::get('/test', Register::class)->name('test');
 });
 

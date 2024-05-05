@@ -1,4 +1,5 @@
-<div class="fixed bottom-0 right-0 w-full flex justify-center p-2">
+<div class="fixed bottom-0 right-0 w-full flex justify-center p-2 gap-2">
+    <span>Follow me</span>
     <ul class="flex justify-center gap-2">
         <li>
             <a href="https://github.com/ardistory" rel="noreferrer" target="_blank"
