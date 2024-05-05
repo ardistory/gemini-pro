@@ -90,6 +90,13 @@ class ImageGenerator
             'nipple',
             'boob',
             'boobs',
+            'gay',
+            'topless',
+            'bra',
+            'booty',
+            'fvck',
+            '18+',
+            'telanjang'
         ];
     }
 }

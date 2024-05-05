@@ -132,7 +132,7 @@ class BotTelegramController extends Controller
                 $this->textRequest = strtolower($requestAll['message']['text']);
             } catch (\Exception $exception) {
                 $this->httpResponse([
-                    'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
+                    'text' => 'Throw exception detected, laporkan masalah ke @storynetsound',
                     'chat_id' => $this->chatIdRequest
                 ], 'sendMessage', 'application/json');
             }
@@ -142,14 +142,14 @@ class BotTelegramController extends Controller
                     $response = $this->isChatFromOwner($this->textRequest);
 
                     ($response == 'Failed to send photo. Error: 400') ? $this->httpResponse([
-                        'text' => "generate gambar gagal!\nlaporkan bug & masalah lainnya ke IG : @ardistory___",
+                        'text' => "generate gambar gagal!\nlaporkan bug & masalah lainnya ke IG : @storynetsound",
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json') : '';
 
                     return response()->json(['message' => $response], 200);
                 } catch (\Exception $exception) {
                     $this->httpResponse([
-                        'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
+                        'text' => 'Throw exception detected, laporkan masalah ke @storynetsound',
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
                 }
@@ -326,7 +326,7 @@ class BotTelegramController extends Controller
                     }
                 } catch (\Exception $exception) {
                     $this->httpResponse([
-                        'text' => 'Throw exception detected, laporkan masalah ke @ardistory___',
+                        'text' => 'Throw exception detected, laporkan masalah ke @storynetsound',
                         'chat_id' => $this->chatIdRequest
                     ], 'sendMessage', 'application/json');
                 }
