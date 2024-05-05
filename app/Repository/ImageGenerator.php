@@ -71,7 +71,25 @@ class ImageGenerator
             'loly',
             'hentai',
             'cantik',
-            'cewek'
+            'cewek',
+            'xnxx',
+            'xvideos',
+            'porn',
+            'porno',
+            'xhamster',
+            'bokep',
+            'missionary',
+            'kiss',
+            'woman',
+            'pose',
+            'masturbates',
+            'bugil',
+            'bikini',
+            'dick',
+            'nipples',
+            'nipple',
+            'boob',
+            'boobs',
         ];
     }
 }

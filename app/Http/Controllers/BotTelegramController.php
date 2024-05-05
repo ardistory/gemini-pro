@@ -137,10 +137,8 @@ class BotTelegramController extends Controller
                 ], 'sendMessage', 'application/json');
             }
 
-            if (str_contains($this->textRequest, "img:") || str_contains($this->textRequest, "IMG:")) {
+            if (str_contains($this->textRequest, "img:")) {
                 try {
-                    $imageGenerator = new ImageGenerator();
-
                     $response = $this->isChatFromOwner($this->textRequest);
 
                     ($response == 'Failed to send photo. Error: 400') ? $this->httpResponse([
@@ -204,7 +202,7 @@ class BotTelegramController extends Controller
                             'info' => "Created new session : " . $this->chatIdRequest . '_session.json',
                             'message' => 'session dimulai, silahkan ajukan pertanyaan'
                         ]);
-                    } else if ($this->textRequest == '/listSession') {
+                    } else if ($this->textRequest == '/listsession') {
                         $allFiles = Storage::disk('local')->allFiles();
 
                         foreach ($allFiles as $file) {
@@ -219,7 +217,7 @@ class BotTelegramController extends Controller
                         return response()->json([
                             'status' => 'list session'
                         ]);
-                    } else if ($this->textRequest == '/clearSession') {
+                    } else if ($this->textRequest == '/clearsession') {
                         $allFiles = Storage::disk('local')->allFiles();
 
                         foreach ($allFiles as $file) {
