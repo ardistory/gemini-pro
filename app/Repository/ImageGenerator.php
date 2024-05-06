@@ -96,7 +96,20 @@ class ImageGenerator
             'booty',
             'fvck',
             '18+',
-            'telanjang'
+            'telanjang',
+            'perempuan',
+            'hookup',
+            'lewd',
+            'bobs',
+            'less',
+            'top',
+            'les',
+            'gang',
+            'bang',
+            'gangbang',
+            'gang bang',
+            'lady',
+            'bitch'
         ];
     }
 }

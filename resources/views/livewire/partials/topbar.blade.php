@@ -37,7 +37,7 @@
                     @foreach ($menus as $menu)
                         <a @if ($menu['title'] != 'Support') wire:navigate @endif
                             href="{{ $menu['title'] != 'Support' ? $menu['url'] : null }}"
-                            class="@if (Route::current()->uri == $menu['url']) bg-gray-800 @endif block rounded-lg px-4 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-gray-300"
+                            class="@if (ucfirst(Route::current()->uri) == $menu['title']) text-[#9099FF] bg-gray-800 @endif block rounded-lg px-4 py-2 text-sm text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                             role="menuitem">
                             {{ $menu['title'] }}
                         </a>
@@ -63,7 +63,7 @@
 
                     @auth
                         <button wire:click='logout'
-                            class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm hover:bg-gradient-to-b hover:from-pink-vite hover:to-blue-vite bg-gradient-to-b from-blue-vite to-pink-vite text-transparent bg-clip-text">
+                            class="font-semibold flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm bg-red-500">
                             Logout
                         </button>
                     @else
@@ -91,7 +91,7 @@
                 </a>
             @endforeach
         </div>
-        <div class="flex gap-2 items-center">
+        <div class="flex gap-5 items-center">
             @auth
                 <livewire:partials.alert-topbar />
                 <div x-data="{ showNavbarDesktop: false }">
