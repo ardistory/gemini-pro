@@ -109,7 +109,10 @@ class ImageGenerator
             'gangbang',
             'gang bang',
             'lady',
-            'bitch'
+            'bitch',
+            'no cloth',
+            'pov',
+            'making love'
         ];
     }
 }

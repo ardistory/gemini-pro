@@ -20,13 +20,13 @@ class Login extends Component
         if (Auth::attempt($this->validate(), true)) {
             event(new UserLogin($this->validate()));
 
-            notify('Login successful', 'Success!', 'success', 'topRight');
+            notify('Login successful', 'Success!', 'success', 'bottomLeft');
 
             redirect()->route('dashboard');
         } else {
-            redirect()->route('login');
-
             notify('Login failed', 'Error!', 'error', 'topLeft');
+
+            redirect()->route('login');
         }
     }
 

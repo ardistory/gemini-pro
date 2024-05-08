@@ -37,8 +37,6 @@ Route::get('/email/verify', EmailNotice::class)->name('verification.notice')->mi
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    notify('Verification success', 'Success!', 'success');
-
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 

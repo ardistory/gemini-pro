@@ -39,7 +39,6 @@ class Register extends Component
                 notify('registration was successful', 'Success!', 'success', 'topRight');
 
                 redirect()->route('login');
-
             } else {
                 notify('Account has been registered', 'Failed!', 'error', 'topLeft');
 

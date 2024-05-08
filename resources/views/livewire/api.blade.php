@@ -53,13 +53,29 @@
                         : JSON
                     </span>
                 </div>
-                <div
+                <div x-data="{ postBodyText: false }"
                     class="relative bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl shadow-lg shadow-black">
                     <span>https://ardiputra.com/post/text</span>
-                    <button
+                    <button x-on:click="postBodyText = !postBodyText"
                         class="absolute right-2 top-[20%] bg-gradient-to-r from-zinc-700 to-black-vite px-2 rounded-lg border-t border-b border-b-zinc-500">
                         Request Body
                     </button>
+                    <div x-show="postBodyText" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                        class="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black-vite backdrop-blur-md rounded-md">
+                        <div class="relative">
+                            <img class="rounded-md" src="{{ asset('assets/img/post-body-text.png') }}">
+                            <div x-on:click="postBodyText = false"
+                                class="absolute -top-3 -right-3 bg-white text-black-vite rounded-full cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col gap-2">
@@ -108,13 +124,29 @@
                         : String Base64
                     </span>
                 </div>
-                <div
+                <div x-data="{ postBodyImage: false }"
                     class="relative bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl shadow-lg shadow-black">
-                    https://ardiputra.com/post/image
-                    <button
+                    <span>https://ardiputra.com/post/image</span>
+                    <button x-on:click="postBodyImage = !postBodyImage"
                         class="absolute right-2 top-[20%] bg-gradient-to-r from-zinc-700 to-black-vite px-2 rounded-lg border-t border-b border-b-zinc-500">
                         Request Body
                     </button>
+                    <div x-show="postBodyImage" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                        class="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black-vite backdrop-blur-md rounded-md">
+                        <div class="relative">
+                            <img class="rounded-md" src="{{ asset('assets/img/post-body-image.png') }}">
+                            <div x-on:click="postBodyImage = false"
+                                class="absolute -top-3 -right-3 bg-white text-black-vite rounded-full cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
