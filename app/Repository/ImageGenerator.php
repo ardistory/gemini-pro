@@ -54,7 +54,6 @@ class ImageGenerator
             'sperm',
             'sperma',
             'body',
-            'women',
             'girl',
             'vagina',
             'penis',
@@ -112,7 +111,7 @@ class ImageGenerator
             'bitch',
             'no cloth',
             'pov',
-            'making love'
+            'making love',
         ];
     }
 }

@@ -10,12 +10,10 @@ use App\Livewire\Dashboard;
 use App\Livewire\Partials\EmailNotice;
 use App\Livewire\Landingpage;
 use App\Livewire\Login;
-use App\Livewire\Partials\EmailResend;
 use App\Livewire\Register;
+use App\Livewire\Test;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Landingpage::class)->name('landingpage');
@@ -23,7 +21,7 @@ Route::get('/', Landingpage::class)->name('landingpage');
 Route::middleware([Authenticate::class, EnsureEmailIsVerified::class])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/api', Api::class)->name('api');
-    Route::get('/test', Register::class)->name('test');
+    Route::get('/test', Test::class)->name('test');
 });
 
 Route::middleware([RedirectIfAuthenticated::class])->group(function () {

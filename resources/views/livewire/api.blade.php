@@ -6,7 +6,7 @@
                 class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">API</span>
         </div>
         <div
-            class="col-span-12 row-span-3 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded p-5 flex flex-col justify-between before:w-56 before:h-56 before:bg-gradient-to-br before:from-pink-vite before:from-50% before:to-blue-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">
+            class="col-span-12 row-span-5 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded p-5 flex flex-col justify-between before:w-56 before:h-56 before:bg-gradient-to-br before:from-pink-vite before:from-50% before:to-blue-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2">
                     <span class="w-auto whitespace-nowrap rounded-full bg-blue-100 px-2.5 py-0.5 text-sm text-blue-700">
@@ -135,7 +135,7 @@
                         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                         x-transition:leave="transition ease-in duration-300"
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="fixed z-50 top-0 left-0 w-full h-full flex items-center justify-center bg-black-vite backdrop-blur-md rounded-md">
+                        class="fixed z-40 top-0 left-0 w-full h-full flex items-center justify-center bg-black-vite backdrop-blur-md rounded-md">
                         <div class="relative">
                             <img class="rounded-md" src="{{ asset('assets/img/post-body-image.png') }}">
                             <div x-on:click="postBodyImage = false"
@@ -151,7 +151,7 @@
             </div>
         </div>
         <div
-            class="col-span-6 row-span-1 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
+            class="col-span-12 row-span-3 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
                 class="inline-flex items-center justify-center rounded-full bg-purple-100 px-2.5 py-0.5 text-purple-700">
                 <p
@@ -171,7 +171,7 @@
             </span>
         </div>
         <div
-            class="relative col-span-6 row-span-1 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
+            class="relative col-span-12 row-span-3 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
                 class="font-semibold before:w-64 before:h-64 before:bg-gradient-to-br before:from-blue-500 before:from-50% before:to-green-500 before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
             </span>
