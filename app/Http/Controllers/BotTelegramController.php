@@ -156,6 +156,16 @@ class BotTelegramController extends Controller
             } else {
                 try {
                     if ($this->textRequest == '/start') {
+                        if ($this->chatIdRequest == 5094048134) {
+                            $this->httpResponse([
+                                'text' => 'Silahkan coba beberapa saat, jika berlanjut hubungi @storynetsound',
+                                'chat_id' => $this->chatIdRequest,
+                                'parse_mode' => 'Markdown'
+                            ], 'sendMessage', 'application/json');
+
+                            return false;
+                        }
+
                         if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
                             $this->httpResponse([
                                 'text' => 'Session exist, bisa langsung ajukan pertanyaan',
@@ -168,6 +178,7 @@ class BotTelegramController extends Controller
                                 'message' => 'Session exist, bisa langsung ajukan pertanyaan'
                             ]);
                         }
+
 
                         $this->httpResponse([
                             'text' => 'session dimulai, silahkan ajukan pertanyaan',
