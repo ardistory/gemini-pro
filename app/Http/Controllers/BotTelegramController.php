@@ -139,6 +139,22 @@ class BotTelegramController extends Controller
 
             if (str_contains($this->textRequest, "img:")) {
                 try {
+                    foreach (ImageGenerator::usersBanned() as $user) {
+                        if ($user == $this->chatIdRequest) {
+                            Storage::disk('local')->append('usersBanned.txt', $user);
+
+                            $this->httpResponse([
+                                'text' => 'Akun telah di banned!',
+                                'chat_id' => $this->chatIdRequest,
+                                'parse_mode' => 'Markdown'
+                            ], 'sendMessage', 'application/json');
+
+                            return response()->json([
+                                'message' => "user " . $this->chatIdRequest . ' has been banned!'
+                            ]);
+                        }
+                    }
+
                     $response = $this->isChatFromOwner($this->textRequest);
 
                     ($response == 'Failed to send photo. Error: 400') ? $this->httpResponse([
@@ -238,7 +254,7 @@ class BotTelegramController extends Controller
                         $allFiles = Storage::disk('local')->allFiles();
 
                         foreach ($allFiles as $file) {
-                            if (str_ends_with($file, '.json')) {
+                            if (str_ends_with($file, '_session.json')) {
                                 Storage::disk('local')->delete($file);
 
                                 $this->httpResponse([
