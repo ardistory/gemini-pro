@@ -15,7 +15,7 @@ class ImageGenerator
         $this->prompt = $prompt;
     }
 
-    public function generateImage()
+    public function generateImage(): mixed
     {
         $headers = [
             'X-RapidAPI-Key' => env('RAPID_API'),
@@ -39,7 +39,14 @@ class ImageGenerator
         return $response;
     }
 
-    public function porbidWord()
+    public static function usersBanned(): array
+    {
+        return [
+            5094048134,
+        ];
+    }
+
+    public function porbidWord(): array
     {
         return [
             'nude',

@@ -156,14 +156,20 @@ class BotTelegramController extends Controller
             } else {
                 try {
                     if ($this->textRequest == '/start') {
-                        if ($this->chatIdRequest == 5094048134) {
-                            $this->httpResponse([
-                                'text' => 'Silahkan coba beberapa saat, jika berlanjut hubungi @storynetsound',
-                                'chat_id' => $this->chatIdRequest,
-                                'parse_mode' => 'Markdown'
-                            ], 'sendMessage', 'application/json');
+                        foreach (ImageGenerator::usersBanned() as $user) {
+                            if ($user == $this->chatIdRequest) {
+                                Storage::disk('local')->append('usersBanned.txt', $user);
 
-                            return false;
+                                $this->httpResponse([
+                                    'text' => 'Akun telah di banned!',
+                                    'chat_id' => $this->chatIdRequest,
+                                    'parse_mode' => 'Markdown'
+                                ], 'sendMessage', 'application/json');
+
+                                return response()->json([
+                                    'message' => "user " . $this->chatIdRequest . ' has been banned!'
+                                ]);
+                            }
                         }
 
                         if (Storage::disk('local')->exists($this->chatIdRequest . '_session.json')) {
