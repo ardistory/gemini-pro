@@ -45,9 +45,8 @@ class BotTelegramController extends Controller
 
     private function imageResponse(array $postBody, string $method, string $imageBase64)
     {
-        $imageData = base64_decode($imageBase64);
-
-        if ($imageData !== false) {
+        if ($imageBase64 !== false) {
+            $imageData = base64_decode($imageBase64);
             $namaFile = uniqid('pic_') . '.png';
 
             $tempFilePath = Storage::disk('local')->put($namaFile, $imageData);
@@ -85,7 +84,8 @@ class BotTelegramController extends Controller
             Storage::disk('local')->append('log.txt', $log);
 
             $response = $this->imageResponse([
-                'chat_id' => $this->chatIdRequest
+                'chat_id' => $this->chatIdRequest,
+                'caption' => str_replace('img:', '', $this->textRequest)
             ], 'sendPhoto', $base64image);
 
             return $response;
@@ -114,7 +114,8 @@ class BotTelegramController extends Controller
         Storage::disk('local')->append('log.txt', $log);
 
         $response = $this->imageResponse([
-            'chat_id' => $this->chatIdRequest
+            'chat_id' => $this->chatIdRequest,
+            'caption' => str_replace('img:', '', $this->textRequest)
         ], 'sendPhoto', $base64image);
 
         return "Safe guest!";
