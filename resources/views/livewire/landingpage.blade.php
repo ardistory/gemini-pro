@@ -6,7 +6,7 @@
             Free AI Gateway For <span class="text-[#DFDFD6]">Developers</span>
         </p>
         <a wire:navigate href="{{ route('login') }}"
-            class="mt-10 shadow-xl shadow-[#9099ff] hover:shadow-2xl hover:shadow-[#9099ff] transition-all duration-200 inline-block rounded-full border-l-2 border-t-2 border-r-2 border-[#9099ff] px-12 py-3 text-sm font-medium hover:bg-[#9099ff]">
+            class="mt-10 shadow-xl shadow-[#9099ff] hover:shadow-2xl hover:shadow-[#9099ff] transition-all duration-200 inline-block rounded-full border-l-2 border-t-2 border-r-2 border-[#9099ff] px-12 py-3 text-sm font-medium hover:bg-[#9099ff] hover:text-white">
             Get Started
         </a>
     </div>

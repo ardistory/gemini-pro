@@ -24,7 +24,7 @@ class Login extends Component
 
             redirect()->route('dashboard');
         } else {
-            notify('Login failed', 'Error!', 'error', 'topLeft');
+            notify('Login failed, please check your username & password again', 'Error!', 'error', 'topLeft');
 
             redirect()->route('login');
         }

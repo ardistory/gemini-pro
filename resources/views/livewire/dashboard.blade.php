@@ -3,7 +3,20 @@
         <div
             class="relative col-span-12 row-span-1 md:col-span-4 md:row-span-6 bg-white/5 backdrop-blur-sm rounded p-3 flex justify-center items-center overflow-hidden">
             <span
-                class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">Dashboard</span>
+                class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
+                <div class="flex items-center gap-2">
+                    <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="w-6 h-6">
+                        <path fill-rule="evenodd"
+                            d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z"
+                            clip-rule="evenodd" />
+                        <path fill-rule="evenodd"
+                            d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Dashboard
+                </div>
+            </span>
         </div>
         <div
             class="col-span-12 row-span-3 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded px-3 py-5 text-black flex flex-col justify-center before:w-56 before:h-56 before:bg-gradient-to-br before:from-blue-vite before:from-50% before:to-green-500 before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">

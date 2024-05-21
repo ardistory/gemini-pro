@@ -3,7 +3,17 @@
         <div
             class="relative col-span-12 row-span-1 md:col-span-4 md:row-span-6 bg-white/5 backdrop-blur-sm rounded p-3 flex justify-center items-center overflow-hidden">
             <span
-                class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">API</span>
+                class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
+                <div class="flex items-center gap-2">
+                    <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="w-6 h-6">
+                        <path fill-rule="evenodd"
+                            d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm14.25 6a.75.75 0 0 1-.22.53l-2.25 2.25a.75.75 0 1 1-1.06-1.06L15.44 12l-1.72-1.72a.75.75 0 1 1 1.06-1.06l2.25 2.25c.141.14.22.331.22.53Zm-10.28-.53a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06L8.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-2.25 2.25Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    API
+                </div>
+            </span>
         </div>
         <div
             class="col-span-12 row-span-5 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded p-5 flex flex-col justify-between before:w-56 before:h-56 before:bg-gradient-to-br before:from-pink-vite before:from-50% before:to-blue-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">
@@ -111,7 +121,8 @@
             </div>
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2">
-                    <span class="w-auto whitespace-nowrap rounded-full bg-blue-100 px-2.5 py-0.5 text-sm text-blue-700">
+                    <span
+                        class="w-auto whitespace-nowrap rounded-full bg-blue-100 px-2.5 py-0.5 text-sm text-blue-700">
                         GET
                     </span>
                     <span
