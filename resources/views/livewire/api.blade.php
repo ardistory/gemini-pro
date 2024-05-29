@@ -1,7 +1,7 @@
 <div class="flex justify-center w-full max-h-dvh md:min-h-dvh box-border">
-    <div class="grid grid-cols-12 grid-rows-7 md:grid-rows-12 w-full gap-5 mt-20 mb-10 mx-5 md:mt-20">
+    <div class="grid grid-cols-12 grid-rows-12 md:grid-rows-12 w-full gap-5 mt-20 mb-10 mx-5 md:mt-20">
         <div
-            class="relative col-span-12 row-span-1 md:col-span-4 md:row-span-6 bg-white/5 backdrop-blur-sm rounded p-3 flex justify-center items-center overflow-hidden">
+            class="relative col-span-12 row-span-2 md:col-span-4 md:row-span-6 bg-white/5 backdrop-blur-sm rounded p-3 flex justify-center items-center overflow-hidden">
             <span
                 class="text-5xl font-bold before:w-64 before:h-64 before:bg-gradient-to-br before:from-red-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
                 <div class="flex items-center gap-2">
@@ -16,7 +16,7 @@
             </span>
         </div>
         <div
-            class="col-span-12 row-span-5 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded p-5 flex flex-col justify-between before:w-56 before:h-56 before:bg-gradient-to-br before:from-pink-vite before:from-50% before:to-blue-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">
+            class="col-span-12 row-span-8 md:col-span-8 md:row-span-12 bg-white/5 backdrop-blur-sm rounded p-5 flex flex-col justify-between before:w-56 before:h-56 before:bg-gradient-to-br before:from-pink-vite before:from-50% before:to-blue-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[170px]">
             <div class="flex flex-col gap-2">
                 <div class="flex gap-2">
                     <span class="w-auto whitespace-nowrap rounded-full bg-blue-100 px-2.5 py-0.5 text-sm text-blue-700">
@@ -223,7 +223,7 @@
             </div>
         </div>
         <div
-            class="col-span-12 row-span-3 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
+            class="col-span-12 row-span-1 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
                 class="inline-flex items-center justify-center rounded-full bg-purple-100 px-2.5 py-0.5 text-purple-700">
                 <p
@@ -243,7 +243,7 @@
             </span>
         </div>
         <div
-            class="relative col-span-12 row-span-3 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
+            class="relative col-span-12 row-span-1 md:col-span-4 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
                 class="font-semibold before:w-64 before:h-64 before:bg-gradient-to-br before:from-blue-500 before:from-50% before:to-green-500 before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
             </span>

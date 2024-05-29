@@ -1,6 +1,6 @@
-<div class="w-full min-h-screen flex flex-col md:flex-row justify-around items-center mb-10 md:mb-0">
+<div class="w-full min-h-screen flex flex-col md:flex-row justify-around items-center mb-14 md:mb-0">
     <div
-        class="mt-[10%] mb-[10%] text-center min-h-[50%] flex flex-col items-center justify-center before:w-32 before:h-32 before:bg-white before:absolute before:-z-50 before:rounded-full before:blur-[150px]">
+        class="mt-[20%] md:mt-[10%] mb-[10%] text-center min-h-[50%] flex flex-col items-center justify-center before:w-32 before:h-32 before:bg-white before:absolute before:-z-50 before:rounded-full before:blur-[150px]">
         <p
             class="mx-auto max-w-sm text-6xl font-semibold bg-gradient-to-tl from-indigo-500 to-pink-500 text-transparent bg-clip-text">
             Free AI Gateway For <span class="text-[#DFDFD6]">Developers</span>
