@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Api;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -34,6 +36,37 @@ class Register extends Component
             if ($checkAccount == null) {
                 $user = User::query()->create($this->validate());
 
+                $uniqId = uniqid();
+
+                Api::query()->create([
+                    'users_username' => $this->validate()['username'],
+                    'key' => $uniqId,
+                    'hit_available' => 500
+                ]);
+
+                $safetySettings = [
+                    "safetySettings" => [
+                        [
+                            "category" => "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                            "threshold" => "BLOCK_NONE"
+                        ],
+                        [
+                            "category" => "HARM_CATEGORY_HATE_SPEECH",
+                            "threshold" => "BLOCK_NONE"
+                        ],
+                        [
+                            "category" => "HARM_CATEGORY_HARASSMENT",
+                            "threshold" => "BLOCK_NONE"
+                        ],
+                        [
+                            "category" => "HARM_CATEGORY_DANGEROUS_CONTENT",
+                            "threshold" => "BLOCK_NONE"
+                        ]
+                    ]
+                ];
+
+                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($safetySettings, JSON_PRETTY_PRINT));
+
                 event(new Registered($user));
 
                 notify('registration was successful', 'Success!', 'success', 'topRight');
@@ -46,6 +79,8 @@ class Register extends Component
             }
         } catch (\Exception $exception) {
             notify("Register failed : " . $exception->getLine(), 'Failed!', 'error', 'topLeft');
+
+            Storage::disk('local')->append('registerFailedLogs.txt', $exception->getMessage());
 
             redirect()->route('register');
         }

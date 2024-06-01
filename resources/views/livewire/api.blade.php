@@ -37,8 +37,8 @@
                     </span>
                 </div>
                 <div class="bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl shadow-lg shadow-black">
-                    https://ardiputra.com/get/text?<span class="text-yellow-500">key</span>=<span
-                        class="text-blue-vite">WSn6CU0Zsxa0nPhlEK1dct</span>&<span
+                    {{ env('APP_URL') }}/get/text?<span class="text-yellow-500">key</span>=<span
+                        class="text-blue-vite">{{ $api_key }}</span>&<span
                         class="text-yellow-500">message</span>=<span class="text-blue-vite">how to
                         center a div</span>
                 </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div x-data="{ postHeaderText: false, postBodyText: false }"
                     class="relative bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl shadow-lg shadow-black">
-                    <span>https://ardiputra.com/post/text</span>
+                    <span>{{ env('APP_URL') }}/post/text</span>
                     <button x-on:click="postHeaderText = !postHeaderText"
                         class="absolute right-[16.5%] md:right-[8.5%] top-[20%] bg-gradient-to-r from-zinc-700 to-black-vite px-2 rounded-lg border-t border-b border-b-zinc-500">
                         Header
@@ -83,7 +83,7 @@
                             <span class="block">{</span>
                             <span class="block">
                                 "<span class="text-yellow-500">X-Api-Key</span>" : <span
-                                    class="italic">"API_KEY"</span>,
+                                    class="italic">"{{ $api_key }}"</span>,
                             </span>
                             <span class="block">
                                 "<span class="text-yellow-500">Content-Type</span>" : "application/json"
@@ -141,8 +141,8 @@
                 </div>
                 <div
                     class="bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl relative shadow-lg shadow-black">
-                    https://ardiputra.com/get/image?<span class="text-yellow-500">key</span>=<span
-                        class="text-blue-vite">WSn6CU0Zsxa0nPhlEK1dct</span>&<span
+                    {{ env('APP_URL') }}/get/image?<span class="text-yellow-500">key</span>=<span
+                        class="text-blue-vite">{{ $api_key }}</span>&<span
                         class="text-yellow-500">prompt</span>=<span class="text-blue-vite">black cat</span>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div x-data="{ postHeaderImage: false, postBodyImage: false }"
                     class="relative bg-gradient-to-r from-zinc-700 to-black px-4 py-2 rounded-2xl shadow-lg shadow-black">
-                    <span>https://ardiputra.com/post/image</span>
+                    <span>{{ env('APP_URL') }}/post/image</span>
                     <button x-on:click="postHeaderImage = !postHeaderImage"
                         class="absolute right-[16.5%] md:right-[8.5%] top-[20%] bg-gradient-to-r from-zinc-700 to-black-vite px-2 rounded-lg border-t border-b border-b-zinc-500">
                         Header
@@ -186,7 +186,7 @@
                             <span class="block">{</span>
                             <span class="block">
                                 "<span class="text-yellow-500">X-Api-Key</span>" : <span
-                                    class="italic">"API_KEY"</span>,
+                                    class="italic">"{{ $api_key }}"</span>,
                             </span>
                             <span class="block">
                                 "<span class="text-yellow-500">Content-Type</span>" : "application/json"
@@ -228,12 +228,11 @@
                 class="inline-flex items-center justify-center rounded-full bg-purple-100 px-2.5 py-0.5 text-purple-700">
                 <p
                     class="whitespace-nowrap text-sm before:w-64 before:h-64 before:bg-gradient-to-br before:from-blue-vite before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[90px]">
-                    WSn6CU0Zsxa0nPhlEK1dct
+                    {{ $api_key }}
                 </p>
 
-                <button
+                <button id="copyApiKey" data-clipboard-text="{{ $api_key }}"
                     class="-me-1 ms-1.5 inline-block rounded-full bg-purple-200 p-0.5 text-purple-700 transition hover:bg-purple-300">
-
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"

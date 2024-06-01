@@ -80,16 +80,18 @@
     {{-- Desktop --}}
     <div class="w-1/2 hidden justify-between md:flex">
         <div class="flex gap-5">
-            @foreach ($menus as $menu)
-                <a @if ($menu['title'] != 'Support') wire:navigate @endif wire:key='{{ $menu['title'] }}'
-                    class="@if (ucfirst(Route::current()->uri) == $menu['title']) text-[#9099FF] bg-pink-vite/5 rounded-md @endif font-medium hover:text-[#9099FF] px-2 flex items-center gap-1"
-                    href="{{ $menu['url'] }}">
-                    <div>
-                        {!! $menu['svg'] !!}
-                    </div>
-                    {{ $menu['title'] == 'Api' ? strtoupper($menu['title']) : $menu['title'] }}
-                </a>
-            @endforeach
+            @if (Route::current()->uri != 'register')
+                @foreach ($menus as $menu)
+                    <a @if ($menu['title'] != 'Support') wire:navigate @endif wire:key='{{ $menu['title'] }}'
+                        class="@if (ucfirst(Route::current()->uri) == $menu['title']) text-[#9099FF] bg-pink-vite/5 rounded-md @endif font-medium hover:text-[#9099FF] px-2 flex items-center gap-1"
+                        href="{{ $menu['url'] }}">
+                        <div>
+                            {!! $menu['svg'] !!}
+                        </div>
+                        {{ $menu['title'] == 'Api' ? strtoupper($menu['title']) : $menu['title'] }}
+                    </a>
+                @endforeach
+            @endif
         </div>
         <div class="flex gap-5 items-center">
             @auth

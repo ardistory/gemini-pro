@@ -28,9 +28,9 @@
         <div
             class="col-span-6 row-span-2 md:col-span-2 md:row-span-6 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
-                class="text-2xl font-bold inline-block before:w-40 before:h-40 before:bg-gradient-to-br before:from-green-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[70px]">738</span>
+                class="text-2xl font-bold inline-block before:w-40 before:h-40 before:bg-gradient-to-br before:from-green-500 before:from-50% before:to-pink-vite before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[70px]">{{ $hitAvailable }}</span>
             <span class="text-xs">more hits left</span>
-            <button
+            {{-- <button
                 class="inline-flex items-center justify-center rounded-full shadow-xl shadow-green-500 px-2 py-0.5 bg-emerald-700 text-emerald-100 gap-1">
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -39,16 +39,21 @@
                 </svg>
 
                 <p class="whitespace-nowrap text-sm">Upgrade</p>
-            </button>
+            </button> --}}
         </div>
         <div
             class="relative col-span-6 row-span-2 md:col-span-2 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
             <span
                 class="text-lg font-semibold before:w-40 before:h-40 before:bg-gradient-to-br before:from-blue-950 before:from-50% before:to-indigo-500 before:to-50% before:absolute before:-z-50 before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] before:rounded-full before:blur-[70px]">
                 Last Hit API</span>
-            <span class="text-xs bg-gradient-to-r from-zinc-700 to-black shadow-xl shadow-black px-2 rounded-md">
-                {{ now() }}
-            </span>
+            <div>
+                <span
+                    class="text-xs bg-gradient-to-r from-zinc-700 to-black shadow-xl shadow-black px-2 rounded-l-full">
+                    {{ now() }}
+                </span>
+                <span
+                    class="text-xs cursor-pointer border-l bg-gradient-to-r from-blue-vite/30 to-pink-vite/30 text-white px-0.5 rounded-r-full">Logs</span>
+            </div>
         </div>
         <div
             class="relative col-span-6 row-span-2 md:col-span-1 md:row-span-3 bg-white/5 backdrop-blur-sm rounded p-3 flex flex-col justify-center items-center overflow-hidden">
