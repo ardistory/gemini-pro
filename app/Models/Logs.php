@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Logs extends Model
 {
     protected $table = 'logs';
-    protected $keyType = 'string';
-    protected $primaryKey = 'users_username';
-    public $incrementing = false;
-    public $timestamps = false;
+    protected $keyType = 'int';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    public $timestamps = true;
     protected $guarded = [];
 
     public function user(): BelongsTo

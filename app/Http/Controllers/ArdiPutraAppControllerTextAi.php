@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Api;
+use App\Models\Logs;
 use App\Repository\GeminiPro;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
@@ -102,6 +103,11 @@ class ArdiPutraAppControllerTextAi extends Controller
                     ]);
 
                     $arraySession = json_decode(Storage::get($this->apiKey . '_session.json'), true);
+
+                    Logs::query()->create([
+                        'users_username' => $dataApi['users_username'],
+                        'services_code_service' => 1
+                    ]);
 
                     return response()->json([
                         'username' => $dataApi['users_username'],

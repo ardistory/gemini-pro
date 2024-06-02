@@ -65,7 +65,7 @@ class Register extends Component
                     ]
                 ];
 
-                Storage::disk('local')->put($this->chatIdRequest . '_session.json', json_encode($safetySettings, JSON_PRETTY_PRINT));
+                Storage::disk('local')->put($uniqId . '_session.json', json_encode($safetySettings, JSON_PRETTY_PRINT));
 
                 event(new Registered($user));
 

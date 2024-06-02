@@ -36,6 +36,7 @@ Route::middleware([RedirectIfAuthenticated::class])->group(function () {
 Route::get('/get/text', [ArdiPutraAppControllerTextAi::class, 'responseText']);
 Route::post('/post/text', [ArdiPutraAppControllerTextAi::class, 'responseText']);
 Route::get('/get/image', [ArdiPutraAppControllerImageAi::class, 'responseImage']);
+Route::post('/post/image', [ArdiPutraAppControllerImageAi::class, 'responseImage']);
 
 // Verifikasi Email
 

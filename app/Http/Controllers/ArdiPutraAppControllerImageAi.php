@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Api;
+use App\Models\Logs;
 use App\Repository\ImageGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -13,13 +14,11 @@ class ArdiPutraAppControllerImageAi extends Controller
 {
     private string $apiKey;
     private string $prompt;
-    private string $textResponse;
 
     public function __construct(Request $request)
     {
         $this->apiKey = $request->query('key') ?? $request->header('X-Api-Key') ?? '';
         $this->prompt = $request->query('prompt') ?? json_decode($request->getContent(), true)['prompt'] ?? '';
-        $this->textResponse = '';
     }
 
     public function responseImage()
@@ -76,6 +75,7 @@ class ArdiPutraAppControllerImageAi extends Controller
                         'hit_available' => $newHitAvailable
                     ]);
 
+                    // Store Image Temporary Online
                     $photo = fopen('photo.jpg', 'w+');
                     fwrite($photo, base64_decode($base64image));
 
@@ -88,12 +88,19 @@ class ArdiPutraAppControllerImageAi extends Controller
                                 'expiration' => 120
                             ]);
 
+                    // Logs DB
+                    Logs::query()->create([
+                        'users_username' => $dataApi['users_username'],
+                        'services_code_service' => 2
+                    ]);
+
+                    // Response JSON
                     return response()->json([
                         'username' => $dataApi['users_username'],
                         'code_status' => 200,
                         'hit_available' => $newHitAvailable,
-                        'message' => $this->prompt,
-                        'result' => json_decode($response->body(), true)['data']['url_viewer']
+                        'prompt' => $this->prompt,
+                        'result' => json_decode($response->body(), true)['data']['display_url']
                     ], 200);
                 } else {
                     return response()->json([
@@ -110,7 +117,7 @@ class ArdiPutraAppControllerImageAi extends Controller
             }
         } catch (\Exception $exception) {
             return response()->json([
-                'alert' => 'Throw exception detected, contact telegram : @storynetsound',
+                'alert' => 'Incorrect KEY',
                 'code_status' => 404
             ], 404);
         }

@@ -11,7 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('logs', function (Blueprint $table) {
-            $table->string('users_username')->primary();
+            $table->id();
+            $table->string('users_username');
             $table->integer('services_code_service');
             $table->timestamps();
             $table->foreign('users_username')->on('users')->references('username');
