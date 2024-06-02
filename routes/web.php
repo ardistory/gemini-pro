@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AlarmController;
-use App\Http\Controllers\ArdiPutraAppController;
+use App\Http\Controllers\ArdiPutraAppControllerImageAi;
+use App\Http\Controllers\ArdiPutraAppControllerTextAi;
 use App\Http\Controllers\BotTelegramController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -32,8 +33,9 @@ Route::middleware([RedirectIfAuthenticated::class])->group(function () {
 
 // ArdiPutra APP
 
-Route::get('/get/text', [ArdiPutraAppController::class, 'responseText']);
-Route::post('/post/text', [ArdiPutraAppController::class, 'responseText']);
+Route::get('/get/text', [ArdiPutraAppControllerTextAi::class, 'responseText']);
+Route::post('/post/text', [ArdiPutraAppControllerTextAi::class, 'responseText']);
+Route::get('/get/image', [ArdiPutraAppControllerImageAi::class, 'responseImage']);
 
 // Verifikasi Email
 

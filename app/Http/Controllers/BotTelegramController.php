@@ -46,20 +46,16 @@ class BotTelegramController extends Controller
     private function imageResponse(array $postBody, string $method, string $imageBase64)
     {
         if ($imageBase64 !== false) {
-            $imageData = base64_decode($imageBase64);
-            $namaFile = uniqid('pic_') . '.png';
+            $photo = fopen('photo.jpg', 'w+');
+            fwrite($photo, base64_decode($imageBase64));
 
-            $tempFilePath = Storage::disk('local')->put($namaFile, $imageData);
-            if ($tempFilePath !== false) {
-                $response = Http::attach('photo', file_get_contents(storage_path('app/' . $namaFile)), 'photo.png')
-                    ->post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/$method", $postBody);
+            $response = http::attach(
+                'photo',
+                $photo,
+                uniqid('ardptr-') . '.jpg'
+            )->post("https://api.telegram.org/bot" . env('TELEGRAM_BOT_TOKEN') . "/$method", $postBody);
 
-                Storage::disk('local')->delete($namaFile);
-
-                return ($response->successful()) ? 'Photo sent successfully!' : 'Failed to send photo. Error: ' . $response->status();
-            } else {
-                return 'Failed to create temporary file for the photo.';
-            }
+            return ($response->successful()) ? 'Photo sent successfully!' : 'Failed to send photo. Error: ' . $response->status();
         } else {
             return 'Invalid base64 image data.';
         }
@@ -123,7 +119,7 @@ class BotTelegramController extends Controller
 
     public function sendResponse(Request $request)
     {
-        if ($request->header('X-Telegram-Bot-Api-Secret-Token') == 'berserk') {
+        if ($request->header('X-Telegram-Bot-Api-Secret-Token') == env('TELE_SECRET_TOKEN')) {
             $requestAll = $request->all();
 
             try {
