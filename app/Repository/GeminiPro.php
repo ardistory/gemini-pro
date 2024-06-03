@@ -11,14 +11,14 @@ class GeminiPro
     private string $chatIdRequest;
     private string $theQuestion;
     public static array $wdyt = [
-        "buatkan saya cerita pendek menarik",
-        "cara mendapatkan uang di internet?",
+        "buatkan saya cerita pendek",
+        "bagaimana internet bekerja?",
         "roadmap laravel seperti apa?",
         "kiat kiat jadi programmer java",
-        "roadmap bahasa pemrograman java",
+        "roadmap bahasa pemrograman python",
         "build hero alucard?",
         "cara push rank mobile legends?",
-        "tutorial membuat pisang goreng",
+        "cara membuat web server",
         "apa itu machine learning?",
         "apa yang terjadi pada tahun 1988 di indonesia?",
         "apa yang terjadi, setelah jepang kalah perang?",

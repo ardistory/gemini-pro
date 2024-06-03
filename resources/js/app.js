@@ -13,3 +13,13 @@ clipboard.on('success', () => {
         'close': false
     });
 });
+
+document.getElementById('clearChat').addEventListener('click', function () {
+    iziToast.error({
+        title: "Clear Chat!",
+        message: "Chat has been cleared",
+        position: 'topCenter',
+        pauseOnHover: false,
+        close: false
+    });
+});
