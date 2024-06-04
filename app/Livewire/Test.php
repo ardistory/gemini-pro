@@ -82,7 +82,7 @@ class Test extends Component
         $dataApi = Api::query()->where('key', '=', $this->apiKey)->first('hit_available');
 
         if ($dataApi['hit_available'] != 0) {
-            $response = Http::timeout(60)->get("127.0.0.1" . "/get/image?key={$this->apiKey}&prompt={$this->prompt}");
+            $response = Http::timeout(60)->get(env('APP_URL') . "/get/image?key={$this->apiKey}&prompt={$this->prompt}");
 
             $responseUrlImage = json_decode($response->body(), true)['result'];
 
