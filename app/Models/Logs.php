@@ -19,4 +19,9 @@ class Logs extends Model
     {
         return $this->belongsTo(User::class, 'users_username', 'username');
     }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Services::class, 'services_code_service', 'code_service');
+    }
 }

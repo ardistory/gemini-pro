@@ -53,7 +53,7 @@ class ArdiPutraAppControllerImageAi extends Controller
                             'code_status' => 200,
                             'hit_available' => $dataApi['hit_available'],
                             'message' => $this->prompt,
-                            'response' => 'contains prohibited words'
+                            'result' => 'contains prohibited words'
                         ], 200);
                     }
                 }
@@ -100,7 +100,7 @@ class ArdiPutraAppControllerImageAi extends Controller
                         'code_status' => 200,
                         'hit_available' => $newHitAvailable,
                         'prompt' => $this->prompt,
-                        'result' => json_decode($response->body(), true)['data']['display_url']
+                        'result' => json_decode($response->body(), true)['data']['display_url'] ?? false
                     ], 200);
                 } else {
                     return response()->json([

@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Api;
 use App\Models\User;
 use App\Repository\GeminiPro;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -16,12 +15,18 @@ class Test extends Component
 {
     public string $apiKey;
     public string $message;
+    public string $prompt;
+    public string $urlImage;
     public array $randomRecommend;
     public bool $isRunOutQuota = false;
+    public bool $isFailedGenerateImage = false;
 
     public function mount()
     {
         $this->apiKey = User::find(Auth::user()->username)->api->key;
+        $this->message = '';
+        $this->prompt = '';
+        $this->urlImage = 'https://learnertrip.com/wp-content/uploads/2023/02/best-ai-generate-images.png';
         $this->randomRecommend = GeminiPro::getWdyt();
     }
 
@@ -70,6 +75,27 @@ class Test extends Component
         ];
 
         Storage::disk('local')->put($this->apiKey . '_session.json', json_encode($safetySettings, JSON_PRETTY_PRINT));
+    }
+
+    public function generateImage()
+    {
+        $dataApi = Api::query()->where('key', '=', $this->apiKey)->first('hit_available');
+
+        if ($dataApi['hit_available'] != 0) {
+            $response = Http::timeout(60)->get("127.0.0.1" . "/get/image?key={$this->apiKey}&prompt={$this->prompt}");
+
+            $responseUrlImage = json_decode($response->body(), true)['result'];
+
+            if ($responseUrlImage != false) {
+                $this->urlImage = $responseUrlImage;
+            } else {
+                $this->isFailedGenerateImage = true;
+            }
+
+            ($response->successful()) ? $this->reset('prompt') : $this->reset('prompt');
+        } else {
+            $this->isRunOutQuota = true;
+        }
     }
 
     #[Title('Test')]
